@@ -1,0 +1,13 @@
+module nx20200720-nc-1.0 {
+  yang-version 1.1;
+  namespace "http://tail-f.com/ns/ned-id/nx20200720-nc-1.0";
+  prefix nx20200720-nc-1.0;
+
+  import nx20200720-nc {
+    prefix family;
+  }
+
+  identity nx20200720-nc-1.0 {
+    base family:nx20200720-nc;
+  }
+}

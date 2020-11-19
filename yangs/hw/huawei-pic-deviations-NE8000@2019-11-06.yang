@@ -1,0 +1,311 @@
+/*
+Copyright (C) 2019 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-pic-deviations-NE8000 {
+  namespace "urn:huawei:yang:huawei-pic-deviations-NE8000";
+  prefix pic-devs-NE8000;
+
+  import huawei-pic {
+    prefix pic;
+  }
+
+  import huawei-extension {
+    prefix ext;
+  }
+
+  import huawei-driver {
+    prefix driver;
+  }
+
+  import huawei-devm {
+    prefix devm;
+  }
+
+  import huawei-license {
+    prefix lcs;
+  }
+
+  organization
+    "Huawei Technologies Co., Ltd.";
+
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+
+  description
+    "This module defines deviation statements for huawei-pic module.";
+
+  revision 2019-11-06 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+
+  typedef alarm-ais-insert-name-deviations {
+    type enumeration {
+      enum "hptim" {
+        value 1;
+        description 
+          "Hptim.";
+      }
+      enum "lptim" {
+        value 2;
+        description 
+          "Lptim.";
+      }
+      enum "rstim" {
+        value 3;
+        description 
+          "Rstim.";
+      }
+      enum "hpuneq" {
+        value 6;
+        description 
+          "Hpuneq.";
+      }
+      enum "hpplm" {
+        value 7;
+        description 
+          "Hpplm.";
+      }
+      enum "lpuneq" {
+        value 8;
+        description 
+          "Lpuneq.";
+      }
+    }
+    description 
+      "Alarm Name.";
+  }
+
+  typedef auto-clear-deviations {
+    type enumeration {
+      enum "physical-mode" {
+        value 14;
+        description 
+          "Physical mode.";
+      }
+    }
+    description 
+      "Auto Clear Type.";
+  }
+
+  typedef port-negotiation-mode-type-deviations {
+    type enumeration {
+      enum "na" {
+        value 1;
+        description 
+          "NA.";
+      }
+      enum "slave" {
+        value 0;
+        description 
+          "Slave.";
+      }
+    }
+    description 
+      "Port negotiation mode.";
+  }
+
+  deviation "/pic:attr-abort" {
+    deviate not-supported;
+  }
+  deviation "/pic:attr-start" {
+    deviate not-supported;
+  }
+  deviation "/pic:clear-port-sdh-err-alarm" {
+    deviate not-supported;
+  }
+  deviation "/driver:driver/driver:global-attribute/pic:global/pic:port-down-laser-shut-log-enable" {
+    deviate not-supported;
+  }
+  deviation "/driver:driver/driver:global-attribute/pic:global/pic:driver-mode" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:speed-switch-mode" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:bit-error" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:trigger-time" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:trigger-time-type" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:tx-power-cfg-type" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:tx-power-target-value" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:fec-mode" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:mru" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:inter-packet-gap" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:mac-itf-mode" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:flexphy-speed" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:attenuation" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:remote-fault" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:optical-module/pic:wave-modulation-mode" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:optical-module/pic:signal-dqpsk-tx" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:optical-module/pic:signal-dqpsk-rx" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:optical-module/pic:vendor-oui" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:optical-module/pic:vendor-rev" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:optical-module/pic:gpon-sn" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:optical-module/pic:channels/pic:channel/pic:wavelength" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:transmission-alarm/pic:threshold-bip2tca" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:pos" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:atm" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:cpos" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:port-alarm/pic:pdh-port-alarm" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:port-alarm/pic:alarm-type/pic:crc-error-threshold/pic:crc-error-threshold/pic:crc-error" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:port-alarm/pic:alarm-type/pic:crc-per-alarm/pic:crc-per-warn" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:adm-port" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:phy-serial" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:phy-voice" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:e1t1" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:e3t3" {
+    deviate not-supported;
+  }
+  deviation "/lcs:license/pic:upgrade-ports" {
+    deviate not-supported;
+  }
+  deviation "/lcs:license/pic:flexe-ports" {
+    deviate not-supported;
+  }
+  deviation "/lcs:license/pic:expand-ports" {
+    deviate not-supported;
+  }
+  deviation "/lcs:license/pic:rtus" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:cards/devm:card/pic:card-tdm-param" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:cards/devm:card/pic:service-mode" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:cards/devm:card/pic:queue-priority" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:cards/devm:card/pic:frame-format" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:cards/devm:card/pic:em-set" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:cards/devm:card/pic:service-switch" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:cards/devm:card/pic:panel-slots" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:mpu-boards/devm:mpu-board/pic:cmac-padding" {
+    deviate not-supported;
+  }
+  deviation "/devm:devm/devm:lpu-boards/devm:lpu-board/pic:cmac-padding" {
+    deviate not-supported;
+  }
+  deviation "/pic:pic/pic:auto-clears/pic:auto-clear/pic:type" {
+    deviate replace {
+      type pic-devs-NE8000:auto-clear-deviations;
+    }
+  }
+  ext:deviation-ext "/pic:pic/pic:auto-clears/pic:auto-clear/pic:time" {
+    ext:deviate-ext replace {
+      ext:dynamic-default {
+        ext:default-value "20" {
+          when "../type = 'physical-mode'";
+          description "The default value is 20 when type is physical-mode.";
+        }
+      }
+    }
+  }
+  deviation "/pic:pic/pic:alarm-ais-inserts/pic:alarm-ais-insert/pic:name" {
+    deviate replace {
+      type pic-devs-NE8000:alarm-ais-insert-name-deviations;
+    }
+  }
+  deviation "/pic:pic/pic:alarm-ais-inserts/pic:alarm-ais-insert/pic:ais" {
+    deviate add {
+      must "(../name = 'lpuneq' and ../ais = 'false') or (../name = 'hptim' or ../name = 'lptim' or ../name = 'rstim' or ../name = 'hpuneq' or ../name = 'hpplm')";
+    }
+  }
+  deviation "/pic:pic/pic:alarm-ais-inserts/pic:alarm-ais-insert/pic:rdi" {
+    deviate add {
+      must "((../name = 'rstim' or ../name = 'hpuneq' or ../name = 'hpplm') and ../rdi = 'false') or (../name = 'hptim' or ../name = 'lptim' or ../name = 'lpuneq')";
+    }
+  }
+  ext:deviation-ext "/pic:pic/pic:alarm-ais-inserts/pic:alarm-ais-insert/pic:rdi" {
+    ext:deviate-ext add {
+      ext:dynamic-default {
+        ext:default-value "false" {
+          when "../name = 'hpuneq' or ../name = 'hpplm' or ../name = 'lpuneq' or ../name = 'hptim' or ../name = 'lptim' or ../name = 'rstim'";
+          description "The default value is false when name is hpuneq or hpplm or lpuneq or hptim or lptim or rstim.";
+        }
+      }
+    }
+  }
+  deviation "/devm:devm/devm:ports/devm:port/pic:ethernet/pic:negotiation-mode" {
+    deviate replace {
+      type pic-devs-NE8000:port-negotiation-mode-type-deviations;
+    }
+  }
+
+}

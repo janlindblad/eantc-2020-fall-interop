@@ -1,0 +1,48 @@
+/*
+Copyright (C) 2019 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-bras-vas {
+  namespace "urn:huawei:yang:huawei-bras-vas";
+  prefix bras-vas;
+  import huawei-extension {
+    prefix ext;
+  }    
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Bras-vas.";
+  revision 2019-04-23 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  ext:task-name  "acl";    
+  container bras-vas {
+    description
+      "Bras-vas.";
+    container service-groups {
+      description
+        "List of the service group.";
+      list service-group {
+        key "name";
+        description
+          "Configure a service group.";
+        leaf name {
+          type string {
+            length "1..31";
+          }
+          description
+            "Service group name.";
+        }
+      }
+    }
+  }
+}

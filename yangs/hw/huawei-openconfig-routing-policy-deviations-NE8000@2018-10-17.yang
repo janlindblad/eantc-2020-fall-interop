@@ -1,0 +1,22 @@
+module huawei-openconfig-routing-policy-deviations-NE8000 {
+  yang-version 1;
+  namespace "urn:huawei:yang:huawei-openconfig-routing-policy-deviations-NE8000";
+  prefix of-rpol-devs-NE8000;
+
+  import openconfig-routing-policy {
+    prefix oc-rpol;
+  }
+
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base Bantian, Longgang Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com Email: support@huawei.com";
+
+  revision 2018-10-17;
+
+  deviation "/oc-rpol:routing-policy" {
+    deviate not-supported;
+  }
+}

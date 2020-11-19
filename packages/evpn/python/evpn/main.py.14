@@ -1,0 +1,101 @@
+# -*- mode: python; python-indent: 4 -*-
+import ncs
+from ncs.application import Service
+
+class ServiceCallbacks(Service):
+
+    devices = {
+        'hw1': {
+            'core-interface': 'GigabitEthernet0/1/0',
+            'core-address': '10.1.1.2',
+            'core-mask': '255.255.255.0',
+            'edge-interface': 'GigabitEthernet0/1/9',
+            'edge-address': '20.0.1.1',
+            'edge-mask': '255.255.255.0',
+            'loopback-address': '1.1.1.1',
+            'label': '100',
+            'isis-net-entity': '10.0000.0000.0001.00',
+            'connected-device': 'hwx4',
+        },
+        'hwx4': {
+            'core-interface': '25GE3/0/0',
+            'core-address': '10.1.1.1',
+            'core-mask': '255.255.255.0',
+            'edge-interface': '25GE3/0/70',
+            'edge-address': '30.0.1.1',
+            'edge-mask': '255.255.255.0',
+            'loopback-address': '2.2.2.2',
+            'label': '200',
+            'isis-net-entity': '10.0000.0000.0002.00',
+            'connected-device': 'hw1',
+        }
+    }
+    @Service.create
+    def cb_create(self, tctx, root, service, proplist):
+
+        def prefixlen2mask(prefixlen):
+            masks = {
+                24: "255.255.255.0", 32: "255.255.255.255"
+            }
+            return masks[prefixlen]
+
+        def apply_template(template_applier, template_name, **kwargs):
+            bindings = ncs.template.Variables()
+            for key, value in kwargs.items():
+                bindings.add(key, value)
+            self.log.info(f"Applying template '{template_name}' with bindings {bindings}")
+            template_applier.apply(template_name, bindings)
+
+        self.log.info('Service create(service=', service._path, ')')
+        applier = ncs.template.Template(service)
+
+        for vpn_connection in service.connections.connection:
+            # vpn_connection.site, .pe_device, .ce_address
+            self.log.info(f'Connecting vpn endpoint {vpn_connection}')
+            site = root.evpn.sites.site[vpn_connection.site]
+            pe = site.provider_edge_devices.pe[vpn_connection.pe_device]
+            # pe.router_id, .isis_net_entity, .label, .core_connections, .edge_connections
+            apply_template(applier, 'mpls-template', DEVICE=pe.device, LSR_ID=pe.router_id)
+            self.log.info(f' Configuring device {pe.device}')            
+            for core in pe.core_connections:
+                # core.connected_site, .connected_pe, .interface, .ipv4_address, .ipv4_prefixlen
+                self.log.info(f' Connected to core pe {core.connected_pe}')
+                connected_site = root.evpn.sites.site[core.connected_site]
+                connected_pe = connected_site.provider_edge_devices.pe[core.connected_pe]
+                apply_template(applier, 'evpn-template', DEVICE=pe.device, INTERFACE=core.interface)
+                apply_template(applier, 'interface-template', DEVICE=pe.device, INTERFACE=core.interface, IP=core.ipv4_address, MASK=prefixlen2mask(core.ipv4_prefixlen))
+                apply_template(applier, 'loopback-interface-template', DEVICE=pe.device, INTERFACE='LoopBack1', IP=pe.router_id, MASK='255.255.255.255')
+                apply_template(applier, 'tunnel-interface-template', DEVICE=pe.device, INTERFACE='Tunnel1', LOOPBACK='LoopBack1', EGRESS_LSR_ID=connected_pe.router_id, SHORTCUT_TYPE="isis")
+                apply_template(applier, 'isis-site-template', DEVICE=pe.device, SITE_ID=vpn_connection.site, ISIS_NET_ENTITY=pe.isis_net_entity, APPLY_QPPB='none')
+                apply_template(applier, 'isis-circuit-template', DEVICE=pe.device, SITE_ID=vpn_connection.site, INTERFACE=core.interface)
+                apply_template(applier, 'isis-soft-circuit-template', DEVICE=pe.device, SITE_ID=vpn_connection.site, INTERFACE='LoopBack1', HAS_PREFIX_SID='true', LABEL=pe.label)
+                apply_template(applier, 'isis-soft-circuit-template', DEVICE=pe.device, SITE_ID=vpn_connection.site, INTERFACE='Tunnel1', HAS_PREFIX_SID='false', LABEL='n/a')
+
+            for edge in pe.edge_connections:
+                # edge.connected_ip, .interface, .ipv4_address, .ipv4_prefixlen
+                apply_template(applier, 'interface-template', DEVICE=pe.device, INTERFACE=edge.interface, IP=edge.ipv4_address, MASK=prefixlen2mask(edge.ipv4_prefixlen))
+                apply_template(applier, 'isis-circuit-template', DEVICE=pe.device, SITE_ID=vpn_connection.site, INTERFACE=edge.interface)
+
+#        for device_name in ServiceCallbacks.devices:
+#            self.log.info(f'Configuring device {device_name}')
+#            dev = ServiceCallbacks.devices[device_name]
+#            x apply_template(applier, 'evpn-template', DEVICE=device_name, INTERFACE=dev['core-interface'])
+#            x apply_template(applier, 'interface-template', DEVICE=device_name, INTERFACE=dev['core-interface'], IP=dev['core-address'], MASK=dev['core-mask'])
+#            x apply_template(applier, 'interface-template', DEVICE=device_name, INTERFACE=dev['edge-interface'], IP=dev['edge-address'], MASK=dev['edge-mask'])
+#            x apply_template(applier, 'loopback-interface-template', DEVICE=device_name, INTERFACE='LoopBack1', IP=dev['loopback-address'], MASK='255.255.255.255')
+#            x apply_template(applier, 'tunnel-interface-template', DEVICE=device_name, INTERFACE='Tunnel1', EGRESS_LSR_ID=ServiceCallbacks.devices[dev['connected-device']]['loopback-address'], SHORTCUT_TYPE="both")
+#            x apply_template(applier, 'mpls-template', DEVICE=device_name, LSR_ID=dev['loopback-address'])
+#            x apply_template(applier, 'isis-site-template', DEVICE=device_name, SITE_ID='1', ISIS_NET_ENTITY=dev['isis-net-entity'], APPLY_QPPB='none')
+#            x apply_template(applier, 'isis-circuit-template', DEVICE=device_name, SITE_ID='1', INTERFACE=dev['core-interface'])
+#            x apply_template(applier, 'isis-circuit-template', DEIVCE=device_name, SITE_ID='1', INTERFACE=dev['edge-interface'])
+#            x apply_template(applier, 'isis-soft-circuit-template', DEVICE=device_name, SITE_ID='1', INTERFACE='LoopBack1', HAS_PREFIX_SID='true', LABEL=dev['label'])
+#            apply_template(applier, 'isis-soft-circuit-template', DEVICE=device_name, SITE_ID='1', INTERFACE='Tunnel1', HAS_PREFIX_SID='false', LABEL='n/a')
+        self.log.info('Service create done')
+
+class Main(ncs.application.Application):
+    def setup(self):
+        self.log.info('Main RUNNING')
+        self.register_service('evpn-servicepoint', ServiceCallbacks)
+
+    def teardown(self):
+        self.log.info('Main FINISHED')

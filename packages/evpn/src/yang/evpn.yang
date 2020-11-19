@@ -1,0 +1,96 @@
+module evpn {
+  yang-version 1.1;
+  namespace "http://example.com/eantc20fall/evpn";
+  prefix evpn;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import ietf-netconf-acm {
+    prefix nacm;
+  } 
+  import tailf-ncs { 
+    prefix ncs; 
+  }
+
+  grouping connection-grp {
+    leaf interface {
+      type string;
+      mandatory true;
+    }
+    leaf ipv4-address {
+      type inet:ipv4-address;
+      mandatory true;
+    }
+    leaf ipv4-prefixlen {
+      type uint8 {
+        range 0..32;
+      }
+      mandatory true;
+    }
+  }
+
+  container evpns {
+    list evpn {
+      key name;
+      leaf name {
+        type string;
+      }
+
+      uses ncs:service-data; 
+      ncs:servicepoint evpn-servicepoint;
+
+      leaf as {
+        type uint32;
+        mandatory true;
+      }
+
+      container provider-edge-devices {
+        list pe {
+          key device;
+          leaf device {
+            type leafref {
+              path /ncs:devices/ncs:device/ncs:name;
+            }
+          }
+          leaf router-id {
+            type inet:ipv4-address;
+            mandatory true;
+          }
+          leaf isis-net-entity {
+            type string;
+            mandatory true;
+          }
+          leaf label {
+            type string;
+            mandatory true;
+          }
+          leaf rd {
+            type string;
+          }
+          list core-connections {
+            key interface;
+            uses connection-grp;
+            leaf connected-pe {
+              type leafref {
+                path /evpns/evpn/provider-edge-devices/pe/device;
+              }
+              mandatory true;
+            }
+          }
+          list edge-connections {
+            key interface;
+            uses connection-grp;
+            leaf subinterface {
+              type int32;
+              mandatory true;
+            }
+          }
+        }
+      }
+    }
+  }
+}

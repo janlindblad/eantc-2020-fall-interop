@@ -1,0 +1,92 @@
+/*
+Copyright (C) 2020 Huawei Technologies Co., Ltd. All rights reserved.
+module: huawei-http
+   +--rw http
+      +--rw comp-enable
+      |  +--rw comp-enable?   boolean
+      +--rw client
+         +--rw ssl-policy-name?   -> /ssl:ssl/ssl-policys/ssl-policy/policy-name
+         +--rw ssl-verify-type?   boolean
+*/
+module huawei-http {
+  namespace "urn:huawei:yang:huawei-http";
+  prefix http;
+  import huawei-extension {
+    prefix ext;
+  }
+  import huawei-ssl {
+    prefix ssl;
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "HTTP server and client.";
+  revision 2020-06-28 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+  typedef http-server-type {
+    type enumeration {
+      enum "restconf" {
+        value 1;
+        description
+          "Restconf: restconf service type.";
+      }
+      enum "omi" {
+        value 2;
+        description
+          "Omi: omi service type.";
+      }
+      enum "web" {
+        value 3;
+        description
+          "Web: web service type.";
+      }
+    }
+    description
+      "HTTP service type.";
+  }
+  ext:task-name  "https";
+  container http {
+    description
+      "HTTP.";
+    container comp-enable {
+      description
+        "Configure HTTP enable.";
+      leaf comp-enable {
+        type boolean;
+          default "false";
+        description
+          "Enable/disable HTTP function.";
+      }
+    }
+    container client {
+      when "../comp-enable/comp-enable = 'true'";
+      description
+        "Configure HTTP client.";
+        leaf ssl-policy-name {
+          type leafref {
+            path "/ssl:ssl/ssl:ssl-policys/ssl:ssl-policy/ssl:policy-name";
+          }
+          description
+            "SSL policy name.";
+        }
+        leaf ssl-verify-type {
+          when "../ssl-policy-name";
+          type boolean;
+          default "false";
+          description
+            "Enable/disable SSL verify peer.";
+        }
+    }
+  }
+}

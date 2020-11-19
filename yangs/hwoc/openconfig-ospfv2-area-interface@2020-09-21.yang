@@ -1,0 +1,108 @@
+submodule openconfig-ospfv2-area-interface {
+
+  belongs-to openconfig-ospfv2 {
+    prefix "oc-ospfv2";
+  }
+
+  import ietf-yang-types { prefix "yang"; }
+  import openconfig-extensions { prefix "oc-ext"; }
+  import openconfig-types { prefix "oc-types"; }
+  import openconfig-interfaces { prefix "oc-if"; }
+  import openconfig-ospf-types { prefix "oc-ospf-types"; }
+
+  include openconfig-ospfv2-common;
+
+  organization "OpenConfig working group";
+
+  contact
+    "OpenConfig working group
+    www.openconfig.net";
+
+  description
+    "This submodule provides OSPFv2 configuration and operational
+    state parameters that are specific to the area context";
+
+  oc-ext:openconfig-version "0.2.2";
+
+  revision "2020-09-21" {
+    description
+      "Initial revision";
+    reference "0.0.1";
+  }
+
+  grouping ospfv2-area-interface-config {
+    description
+      "Configuration parameters for an OSPF interface";
+
+    leaf id {
+      type string;
+      description
+        "An operator-specified string utilised to uniquely
+        reference this interface";
+    }
+
+    leaf network-type {
+      type identityref {
+        base "oc-ospf-types:OSPF_NETWORK_TYPE";
+      }
+      description
+        "The type of network that OSPFv2 should use for the specified
+        interface.";
+    }
+
+    leaf authentication-type {
+      type string;
+      // rjs TODO: discuss with bogdanov@ what the approach for auth
+      // links should be.
+      description
+        "The type of authentication that should be used on this
+        interface";
+    }
+
+    leaf passive {
+      type boolean;
+      description
+        "When this leaf is set to true, the interface should be
+        advertised within the OSPF area but OSPF adjacencies should
+        not be established over the interface";
+    }
+  }
+
+  grouping ospfv2-area-interfaces-structure {
+    description
+      "Structural grouping for configuration and operational state
+      parameters that relate to an interface";
+
+    container interfaces {
+      description
+        "Enclosing container for a list of interfaces enabled within
+        this area";
+
+      list interface {
+        key "id";
+
+        description
+          "List of interfaces which are enabled within this area";
+
+        leaf id {
+          type leafref {
+            path "../config/id";
+          }
+          description
+            "A pointer to the identifier for the interface.";
+        }
+
+        container config {
+          description
+            "Configuration parameters for the interface on which
+            OSPFv2 is enabled";
+
+          uses ospfv2-area-interface-config;
+        }
+
+        /*uses oc-if:interface-ref;*/
+
+      }
+    }
+  }
+}

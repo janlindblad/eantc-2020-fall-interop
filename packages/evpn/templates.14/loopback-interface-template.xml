@@ -1,0 +1,68 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0">
+ <devices xmlns="http://tail-f.com/ns/ncs">
+  <device tags="nocreate">
+    <name>{$DEVICE}</name>
+    <config>
+      <ifm xmlns="urn:huawei:yang:huawei-ifm">
+        <interfaces>
+          <interface tags="merge">
+            <name>{$INTERFACE}</name>
+            <class>main-interface</class>
+            <type>LoopBack</type>
+            <number>1</number>
+            <admin-status>up</admin-status>
+            <router-type>PtoP</router-type>
+            <clear-ip-df>false</clear-ip-df>
+            <link-up-down-trap-enable>true</link-up-down-trap-enable>
+            <statistic-enable>true</statistic-enable>
+            <statistic-mode>interface-based</statistic-mode>
+            <mtu>1500</mtu>
+            <spread-mtu-flag>false</spread-mtu-flag>
+            <vrf-name>_public_</vrf-name>
+            <l2-mode-enable>false</l2-mode-enable>
+            <cpudefend xmlns="urn:huawei:yang:huawei-cpudefend">
+              <arp-safeguards>
+                <arp-safeguard>false</arp-safeguard>
+              </arp-safeguards>
+              <arp-vlan-car>
+                <rate-limit>20</rate-limit>
+              </arp-vlan-car>
+              <nd-vlan-cars>
+                <nd-vlan-car>
+                  <type>na</type>
+                  <rate-limit>100</rate-limit>
+                </nd-vlan-car>
+                <nd-vlan-car>
+                  <type>ns-unicast</type>
+                  <rate-limit>100</rate-limit>
+                </nd-vlan-car>
+                <nd-vlan-car>
+                  <type>ns-multicast</type>
+                  <rate-limit>100</rate-limit>
+                </nd-vlan-car>
+              </nd-vlan-cars>
+              <arp-check>
+                <check-destination-ip>false</check-destination-ip>
+              </arp-check>
+              <arp-filter>
+                <filter-gratuitous>false</filter-gratuitous>
+                <filter-mac-illegal>false</filter-mac-illegal>
+                <filter-tha-filled-request>false</filter-tha-filled-request>
+              </arp-filter>
+            </cpudefend>
+            <ipv4 xmlns="urn:huawei:yang:huawei-ip">
+              <addresses>
+                <address>
+                  <ip>{$IP}</ip>
+                  <mask>{$MASK}</mask>
+                  <type>main</type>
+                </address>
+              </addresses>
+            </ipv4>
+          </interface>
+        </interfaces>
+      </ifm>
+    </config>
+  </device>
+ </devices>
+</config-template>

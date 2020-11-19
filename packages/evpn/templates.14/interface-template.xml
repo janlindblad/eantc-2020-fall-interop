@@ -1,0 +1,25 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0">
+ <devices xmlns="http://tail-f.com/ns/ncs">
+  <device tags="nocreate">
+    <name>{$DEVICE}</name>
+    <config>
+      <ifm xmlns="urn:huawei:yang:huawei-ifm">
+        <interfaces>
+          <interface>
+            <name>{$INTERFACE}</name>
+            <ipv4 xmlns="urn:huawei:yang:huawei-ip" tags="merge">
+              <addresses>
+                <address>
+                  <ip>{$IP}</ip>
+                  <mask>{$MASK}</mask>
+                  <type>main</type>
+                </address>
+              </addresses>
+            </ipv4>
+          </interface>
+        </interfaces>
+      </ifm>
+    </config>
+  </device>
+ </devices>
+</config-template>

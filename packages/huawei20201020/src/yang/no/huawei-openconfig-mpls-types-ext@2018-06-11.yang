@@ -1,0 +1,32 @@
+/*
+Copyright (C) 2018 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-openconfig-mpls-types-ext {
+  namespace "urn:huawei:yang:huawei-openconfig-mpls-types-ext";
+  prefix "hw-oc-mplst-ext";
+  import openconfig-mpls-types {
+    prefix "oc-mplst";
+  }
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com
+     ";
+  description
+    "GRPC.";
+  revision 2018-06-11 {
+    description
+      "The modifications in the schema file are synchronized to the YANG file.";
+    reference
+      "Huawei private.";
+  }
+  identity NONNULL {
+    base oc-mplst:NULL_LABEL_TYPE;
+    description "Non-null label is used.";
+  }
+}

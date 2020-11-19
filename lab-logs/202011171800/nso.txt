@@ -1,0 +1,1222 @@
+admin@ncs(config)# 
+admin@ncs(config)# rollback configuration 
+Tue Nov  17 16:01:50.680 UTC+00:00
+admin@ncs(config)# show c
+Tue Nov  17 16:01:55.300 UTC+00:00
+devices device hw1
+ config
+  bgp-lsp bfd parameters detection-multiplier 3
+  ifm interfaces interface GigabitEthernet0/1/0
+   ipv4 addresses address 10.1.1.2
+    mask 255.255.255.0
+    type main
+   !
+  !
+  ifm interfaces interface GigabitEthernet0/1/9
+   ipv4 addresses address 20.0.1.1
+    mask 255.255.255.0
+    type main
+   !
+  !
+  ifm interfaces interface LoopBack1
+   class                    main-interface
+   type                     LoopBack
+   number                   1
+   admin-status             up
+   router-type              PtoP
+   clear-ip-df              false
+   link-up-down-trap-enable true
+   statistic-enable         true
+   statistic-mode           interface-based
+   mtu                      1500
+   spread-mtu-flag          false
+   vrf-name                 _public_
+   l2-mode-enable           false
+   cpudefend arp-safeguards arp-safeguard false
+   cpudefend arp-vlan-car rate-limit 20
+   cpudefend nd-vlan-cars nd-vlan-car na
+    rate-limit 100
+   !
+   cpudefend nd-vlan-cars nd-vlan-car ns-unicast
+    rate-limit 100
+   !
+   cpudefend nd-vlan-cars nd-vlan-car ns-multicast
+    rate-limit 100
+   !
+   cpudefend arp-check check-destination-ip false
+   cpudefend arp-filter filter-gratuitous false
+   cpudefend arp-filter filter-mac-illegal false
+   cpudefend arp-filter filter-tha-filled-request false
+   ipv4 addresses address 1.1.1.1
+    mask 255.255.255.255
+    type main
+   !
+  !
+  ifm interfaces interface Tunnel1
+   class                    main-interface
+   type                     Tunnel
+   number                   1
+   admin-status             up
+   router-type              PtoP
+   clear-ip-df              false
+   link-up-down-trap-enable true
+   statistic-enable         true
+   statistic-mode           interface-based
+   mtu                      1500
+   spread-mtu-flag          false
+   vrf-name                 _public_
+   l2-mode-enable           false
+   cpudefend arp-safeguards arp-safeguard false
+   cpudefend arp-vlan-car rate-limit 20
+   cpudefend nd-vlan-cars nd-vlan-car na
+    rate-limit 100
+   !
+   cpudefend nd-vlan-cars nd-vlan-car ns-unicast
+    rate-limit 100
+   !
+   cpudefend nd-vlan-cars nd-vlan-car ns-multicast
+    rate-limit 100
+   !
+   cpudefend arp-check check-destination-ip false
+   cpudefend arp-filter filter-gratuitous false
+   cpudefend arp-filter filter-mac-illegal false
+   cpudefend arp-filter filter-tha-filled-request false
+   ipv4 unnumbered-address unnumbered-if-name LoopBack1
+   tunnel-protocol te-tunnel common-attributes signal-protocol segment-routing
+   tunnel-protocol te-tunnel common-attributes tunnel-id 1
+   tunnel-protocol te-tunnel common-attributes egress-lsr-id 2.2.2.2
+   tunnel-protocol te-tunnel common-attributes reserved-for-binding false
+   tunnel-protocol te-tunnel common-attributes lsp-tp-outbound false
+   tunnel-protocol te-tunnel common-attributes statistic-enable false
+   tunnel-protocol te-tunnel sr-te bandwidth 0
+   tunnel-protocol te-tunnel sr-te setup-priority 7
+   tunnel-protocol te-tunnel sr-te hold-priority 7
+   tunnel-protocol te-tunnel sr-te pce-delegate no
+   tunnel-protocol te-tunnel sr-te split-tunnel false
+   tunnel-protocol te-tunnel sr-te path-verification inherit
+   tunnel-protocol te-tunnel sr-te adjacency-sid false
+   tunnel-protocol te-tunnel sr-te lsp-paths lsp-path primary
+    hop-limit   32
+    include-any 0x0
+    exclude-any 0x0
+   !
+   tunnel-protocol te-tunnel sr-te bfd-for-lsp detect-multiplier 3
+   tunnel-protocol te-tunnel sr-te bfd-for-tunnel detect-multiplier 3
+   tunnel-protocol te-tunnel igp-attr adv-enable false
+   tunnel-protocol te-tunnel igp-attr adv-ipv6-enable false
+   tunnel-protocol te-tunnel igp-attr hold-time 0
+   tunnel-protocol te-tunnel igp-attr shortcut-type both
+   tunnel-protocol te-tunnel igp-attr absolute 5
+  !
+  mpls common global mpls-enable true
+  mpls common global lsr-id 1.1.1.1
+  mpls common global null-lable-type non-null
+  mpls common global diff-serv-mode uniform
+  mpls common global te-ttl-mode uniform
+  mpls common global ldp-ttl-mode uniform
+  mpls common global sr-ttl-mode uniform
+  mpls common global ftn-delay-time 0
+  mpls common global mpls-mtu-independent false
+  mpls common global entropy-label-capability false
+  mpls common global bgp-ttl-mode ttl-mode pipe
+  mpls common global ttl-expiration-pop switch-flag true
+  mpls common threshold-alarm autobypass-tunnel-number upper-value 80
+  mpls common threshold-alarm autobypass-tunnel-number lower-value 75
+  mpls common threshold-alarm autoprimary-tunnel-number upper-value 80
+  mpls common threshold-alarm autoprimary-tunnel-number lower-value 75
+  mpls common threshold-alarm ldp-lsp-number upper-value 80
+  mpls common threshold-alarm ldp-lsp-number lower-value 75
+  mpls common threshold-alarm outsegment-number upper-value 80
+  mpls common threshold-alarm outsegment-number lower-value 75
+  mpls common threshold-alarm remote-adjacency-number upper-value 80
+  mpls common threshold-alarm remote-adjacency-number lower-value 75
+  mpls common threshold-alarm mldp-tree-number upper-value 80
+  mpls common threshold-alarm mldp-tree-number lower-value 75
+  mpls common threshold-alarm mldp-branch-number upper-value 80
+  mpls common threshold-alarm mldp-branch-number lower-value 75
+  mpls common threshold-alarm rsvp-lsp-number upper-value 80
+  mpls common threshold-alarm rsvp-lsp-number lower-value 75
+  mpls common threshold-alarm dynamic-label-number upper-value 80
+  mpls common threshold-alarm dynamic-label-number lower-value 70
+  mpls ldp enable          false
+  mpls ldp lsp-trigger-mode host
+  mpls ldp proxy-egress-lsp-disable false
+  mpls ldp bgp-label       false
+  mpls ldp sr-lsp-trigger-mode none
+  mpls ldp bfd p2p detect-multiplier 3
+  mpls ldp bfd p2p tunnel-detect-multiplier 3
+  mpls ldp bfd mldp p2mp-tunnel-dm 3
+  mpls te enable true
+  mpls te global switch-delay-time 5000
+  mpls te global delete-delay-time 20000
+  mpls te global frr-timer-weight 300
+  mpls te global pce-delegate   no
+  mpls te global pce-inter-layer-delegate false
+  mpls te global pce-cleanup-lsp-state false
+  mpls te global pce-cleanup-initiated-lsp false
+  mpls te global pce-clean-stitch-label false
+  mpls te global lsp-loopback-clear-time 5
+  mpls te global ip-prefix-delete-time 300
+  mpls te global slsp-deduct-rsvp-bandwidth false
+  mpls te global reoptimization-link-disable true
+  mpls te global rsvp-entropy-label false
+  mpls te global bandwidth-auto-config-disable false
+  mpls te global suppress-flapping-disable false
+  mpls te global path-verification false
+  mpls te global soft-preemption false
+  mpls te global self-ping      false
+  mpls te global self-ping-duration 1800
+  mpls te global p2mp-enable    false
+  mpls te global p2mp-auto-frr  false
+  mpls te global p2mp-frr-mbb-type sub-lsp
+  mpls te global auto-frr-enable false
+  mpls te global auto-frr-reoptimization false
+  mpls te global auto-bandwidth-enable false
+  mpls te global flood-bandwidth-enable false
+  mpls te global ds-te-mode     non-ietf
+  mpls te rsvp enable false
+  mpls te cspf enable             true
+  mpls te cspf preferred-igp      ospf
+  mpls te cspf multi-instances-short-path-mode disable
+  mpls te cspf tie-breaking       random
+  mpls te cspf path-metric-type   te
+  mpls te cspf srlg-path-calculate-mode default
+  mpls te cspf fast-notice        false
+  mpls te cspf disable-optimize-mode false
+  mpls te bfd-for-lsp detect-multiplier 3
+  mpls te bfd-for-tunnel detect-multiplier 3
+  mplsoam global oam-enable false
+  network-instance instances instance _public_
+   isis sites site 1
+    level             level-2
+    shutdown          false
+    cost-style        wide
+    direct-inherit    false
+    adv-one-intf-addr false
+    lsp-fragments-extend enable-level1 false
+    lsp-fragments-extend enable-level2 false
+    poi-tlv enable false
+    lsdb-limit enable false
+    suppress-flapping peer enable true
+    suppress-flapping lsp-flood interval 10
+    suppress-flapping lsp-flood threshold 30
+    suppress-flapping route-calculate interval 10
+    suppress-flapping route-calculate threshold 30
+    suppress-flapping lsp-generation interval 10
+    suppress-flapping lsp-generation threshold 30
+    timer lsp-max   1200
+    timer lsp-refresh 900
+    timer purge-lsp-delay 20
+    timer spf max 5
+    timer spf init 50
+    timer spf incr 200
+    timer lsp-generation max-level1 2
+    timer lsp-generation max-level2 2
+    lsp-length originate-level1 1497
+    lsp-length originate-level2 1497
+    lsp-length receive 1497
+    set-overload type no-set
+    lsp-lifetime enable true
+    lsp-lifetime max-age
+    bgp-ls enable-level1 false
+    bgp-ls enable-level2 false
+    bgp-ls enable-ipv6-level1 false
+    bgp-ls enable-ipv6-level2 false
+    bier enable false
+    extern-ability adj-strict-check false
+    extern-ability ecmp-prefer none
+    extern-ability opt-checksum false
+    extern-ability virtual-cluster false
+    extern-ability virtual-access false
+    local-mt enable false
+    net-entitys net-entity 10.0000.0000.0001.00
+    !
+    circuits circuit GigabitEthernet0/1/0
+     level                    level-1-2
+     p2p-enable               false
+     hello-mode               normal
+     silent-enable            false
+     purge-source-trace-block false
+     mesh-group state inactive
+     suppress-flapping peer enable true
+     suppress-flapping peer detect-interval 60
+     suppress-flapping peer threshold 10
+     suppress-flapping peer resume-interval 120
+     suppress-flapping peer hold-max-cost true
+     timer csnp-interval-level1 10
+     timer csnp-interval-level2 10
+     timer throttle-interval 50
+     timer throttle-count 10
+     broadcast dis-priority-level1 64
+     broadcast dis-priority-level2 64
+     broadcast hello-timer-level1 10
+     broadcast hello-timer-level2 10
+     broadcast hold-multiplier-level1 3
+     broadcast hold-multiplier-level2 3
+     broadcast conser-level1 false
+     broadcast conser-level2 false
+     afs af afipv4
+      tag-level1     0
+      tag-level2     0
+      suppress-reach no-set
+      bfd-bit-error  no-set
+      mpls-ldp auto-flag-block false
+      frr lfa-block-level1 false
+      frr lfa-block-level2 false
+      frr rlfa-disable-level1 false
+      frr rlfa-disable-level2 false
+      frr tilfa-disable-level1 false
+      frr tilfa-disable-level2 false
+      bfd min-rx        10
+      bfd min-tx        10
+      bfd detect-multiplier 3
+      bfd frr-binding   false
+      ldp-sync enable none
+     !
+    !
+    circuits circuit GigabitEthernet0/1/9
+     level                    level-1-2
+     p2p-enable               false
+     hello-mode               normal
+     silent-enable            false
+     purge-source-trace-block false
+     mesh-group state inactive
+     suppress-flapping peer enable true
+     suppress-flapping peer detect-interval 60
+     suppress-flapping peer threshold 10
+     suppress-flapping peer resume-interval 120
+     suppress-flapping peer hold-max-cost true
+     timer csnp-interval-level1 10
+     timer csnp-interval-level2 10
+     timer throttle-interval 50
+     timer throttle-count 10
+     broadcast dis-priority-level1 64
+     broadcast dis-priority-level2 64
+     broadcast hello-timer-level1 10
+     broadcast hello-timer-level2 10
+     broadcast hold-multiplier-level1 3
+     broadcast hold-multiplier-level2 3
+     broadcast conser-level1 false
+     broadcast conser-level2 false
+     afs af afipv4
+      tag-level1     0
+      tag-level2     0
+      suppress-reach no-set
+      bfd-bit-error  no-set
+      mpls-ldp auto-flag-block false
+      frr lfa-block-level1 false
+      frr lfa-block-level2 false
+      frr rlfa-disable-level1 false
+      frr rlfa-disable-level2 false
+      frr tilfa-disable-level1 false
+      frr tilfa-disable-level2 false
+      bfd min-rx        10
+      bfd min-tx        10
+      bfd detect-multiplier 3
+      bfd frr-binding   false
+      ldp-sync enable none
+     !
+    !
+    circuits circuit LoopBack1
+     level                    level-1-2
+     p2p-enable               true
+     hello-mode               normal
+     silent-enable            false
+     purge-source-trace-block false
+     mesh-group state inactive
+     suppress-flapping peer enable true
+     suppress-flapping peer detect-interval 60
+     suppress-flapping peer threshold 10
+     suppress-flapping peer resume-interval 120
+     suppress-flapping peer hold-max-cost true
+     timer csnp-interval-level1 10
+     timer csnp-interval-level2 10
+     timer throttle-interval 50
+     timer throttle-count 10
+     p2p snpa-check          false
+     p2p peer-ip-ignore      false
+     p2p ppp-negotiation     3-way
+     p2p hello-timer         10
+     p2p hold-multiplier     3
+     p2p lsp-retransmit-interval 5
+     p2p ppp-osicp-check     false
+     p2p conser              false
+     afs af afipv4
+      tag-level1     0
+      tag-level2     0
+      suppress-reach no-set
+      mpls-ldp auto-flag-block false
+      frr lfa-block-level1 false
+      frr lfa-block-level2 false
+      frr rlfa-disable-level1 false
+      frr rlfa-disable-level2 false
+      frr tilfa-disable-level1 false
+      frr tilfa-disable-level2 false
+      ldp-sync enable none
+      prefix-sids prefix-sid 0
+       type      index
+       label     100
+       node-flag true
+      !
+     !
+    !
+    circuits circuit Tunnel1
+     level                    level-1-2
+     p2p-enable               true
+     hello-mode               normal
+     silent-enable            false
+     purge-source-trace-block false
+     mesh-group state inactive
+     suppress-flapping peer enable true
+     suppress-flapping peer detect-interval 60
+     suppress-flapping peer threshold 10
+     suppress-flapping peer resume-interval 120
+     suppress-flapping peer hold-max-cost true
+     timer csnp-interval-level1 10
+     timer csnp-interval-level2 10
+     timer throttle-interval 50
+     timer throttle-count 10
+     p2p snpa-check          false
+     p2p peer-ip-ignore      false
+     p2p ppp-negotiation     3-way
+     p2p hello-timer         10
+     p2p hold-multiplier     3
+     p2p lsp-retransmit-interval 5
+     p2p ppp-osicp-check     false
+     p2p conser              false
+     afs af afipv4
+      tag-level1     0
+      tag-level2     0
+      suppress-reach no-set
+      mpls-ldp auto-flag-block false
+      frr lfa-block-level1 false
+      frr lfa-block-level2 false
+      frr rlfa-disable-level1 false
+      frr rlfa-disable-level2 false
+      frr tilfa-disable-level1 false
+      frr tilfa-disable-level2 false
+      ldp-sync enable none
+     !
+    !
+    afs af afipv4
+     max-load-balancing 64
+     auto-cost          false
+     bandwidth          100
+     bfd-bit-error      false
+     attach-bit adv-control no-type
+     attach-bit avoid-learn false
+     preference value 15
+     leak-route-level1-to-level2 enable true
+     leak-route-level1-to-level2 tag 0
+     leak-route-level1-to-level2 allow-filter false
+     leak-route-level1-to-level2 nosidflag false
+     traffic-eng enable-level1 false
+     traffic-eng enable-level2 true
+     traffic-eng metric-delay adv-level1 false
+     traffic-eng metric-delay adv-level2 false
+     bfd enable        false
+     bfd frr-binding   false
+     bfd detect-multiplier 3
+     ldp-sync enable false
+     ldp-sync infinite
+     mpls-ldp-global auto-flag false
+     advertise-link-attributes enable false
+     frr enable false
+     frr remote-lfa rlfa-level1 false
+     frr remote-lfa rlfa-level2 false
+     frr tiebreaker node-protect-level1 40
+     frr tiebreaker node-protect-level2 40
+     frr tiebreaker lowest-cost-level1 20
+     frr tiebreaker lowest-cost-level2 20
+     frr tiebreaker non-ecmp-level1 10
+     frr tiebreaker non-ecmp-level2 10
+     frr tiebreaker srlg-disjoint-level1 5
+     frr tiebreaker srlg-disjoint-level2 5
+     frr tiebreaker hold-max-cost-level1 15
+     frr tiebreaker hold-max-cost-level2 15
+     frr tilfa enable-level1 false
+     frr tilfa enable-level2 false
+     segment-routing enable true
+     segment-routing auto-adj-sid true
+     segment-routing adv-static-sid false
+     segment-routing binding receive true
+     segment-routing binding advertise false
+     segment-routing lsp-trigger type host
+    !
+    avoid-micro-loop frr-enable false
+    avoid-micro-loop frr-rib-update-delay 100
+    avoid-micro-loop sr-enable false
+    avoid-micro-loop sr-rib-update-delay 5000
+    avoid-micro-loop te-tunnel-enable false
+    avoid-micro-loop te-tunnel-delay 1000
+    avoid-micro-loop sr-enable-flag false
+    avoid-micro-loop sr-new-update-delay 5000
+    srgbs srgb 16000 35000
+    !
+   !
+   mpls common mpls-interfaces mpls-interface GigabitEthernet0/1/0
+   !
+   segment-routing enable true
+   segment-routing tunnel-prefer ldp
+   segment-routing traffic-stats mode none
+   segment-routing srpolicy policy-attributes delete-delay 20000
+   segment-routing srpolicy policy-attributes hsb-enable false
+   segment-routing srpolicy policy-attributes traffic-statistics-enable false
+   segment-routing srpolicy policy-attributes bgp-ls-enable false
+   segment-routing srpolicy policy-attributes policy-threshold-upper 80
+   segment-routing srpolicy policy-attributes policy-threshold-lower 75
+   segment-routing srpolicy policy-attributes list-threshold-upper 80
+   segment-routing srpolicy policy-attributes list-threshold-lower 75
+   segment-routing srpolicy policy-attributes bfd enable disable
+   segment-routing srpolicy policy-attributes bfd min-tx 10
+   segment-routing srpolicy policy-attributes bfd min-rx 10
+   segment-routing srpolicy policy-attributes bfd multi-num 3
+   te interfaces interface GigabitEthernet0/1/0
+    mpls-te-enable  true
+    p2mp-te-disable false
+    attribute admin-groups 0x0
+    attribute bandwidth max-reserved 0
+    attribute bandwidth bc0 0
+    attribute bandwidth change-threshold-down 10
+    attribute bandwidth change-threshold-up 10
+    mpls-te-attribute auto-frr-mode default
+    mpls-te-attribute auto-frr-attributes bandwidth 0
+    mpls-te-attribute auto-frr-attributes setup-priority 7
+    mpls-te-attribute auto-frr-attributes hold-priority 7
+    mpls-te-attribute auto-frr-attributes hop-limit 32
+    mpls-te-attribute auto-frr-attributes include-any 0x0
+    mpls-te-attribute auto-frr-attributes exclude-any 0x0
+   !
+  !
+ !
+!
+devices device hwx4
+ config
+  bgp-lsp bfd parameters detection-multiplier 3
+  ifm interfaces interface 25GE3/0/0
+   ipv4 addresses address 10.1.1.1
+    mask 255.255.255.0
+    type main
+   !
+  !
+  ifm interfaces interface 25GE3/0/70
+   ipv4 addresses address 30.0.1.1
+    mask 255.255.255.0
+    type main
+   !
+  !
+  ifm interfaces interface LoopBack1
+   class                    main-interface
+   type                     LoopBack
+   number                   1
+   admin-status             up
+   router-type              PtoP
+   clear-ip-df              false
+   link-up-down-trap-enable true
+   statistic-enable         true
+   statistic-mode           interface-based
+   mtu                      1500
+   spread-mtu-flag          false
+   vrf-name                 _public_
+   l2-mode-enable           false
+   cpudefend arp-safeguards arp-safeguard false
+   cpudefend arp-vlan-car rate-limit 20
+   cpudefend nd-vlan-cars nd-vlan-car na
+    rate-limit 100
+   !
+   cpudefend nd-vlan-cars nd-vlan-car ns-unicast
+    rate-limit 100
+   !
+   cpudefend nd-vlan-cars nd-vlan-car ns-multicast
+    rate-limit 100
+   !
+   cpudefend arp-check check-destination-ip false
+   cpudefend arp-filter filter-gratuitous false
+   cpudefend arp-filter filter-mac-illegal false
+   cpudefend arp-filter filter-tha-filled-request false
+   ipv4 addresses address 2.2.2.2
+    mask 255.255.255.255
+    type main
+   !
+  !
+  ifm interfaces interface Tunnel1
+   class                    main-interface
+   type                     Tunnel
+   number                   1
+   admin-status             up
+   router-type              PtoP
+   clear-ip-df              false
+   link-up-down-trap-enable true
+   statistic-enable         true
+   statistic-mode           interface-based
+   mtu                      1500
+   spread-mtu-flag          false
+   vrf-name                 _public_
+   l2-mode-enable           false
+   cpudefend arp-safeguards arp-safeguard false
+   cpudefend arp-vlan-car rate-limit 20
+   cpudefend nd-vlan-cars nd-vlan-car na
+    rate-limit 100
+   !
+   cpudefend nd-vlan-cars nd-vlan-car ns-unicast
+    rate-limit 100
+   !
+   cpudefend nd-vlan-cars nd-vlan-car ns-multicast
+    rate-limit 100
+   !
+   cpudefend arp-check check-destination-ip false
+   cpudefend arp-filter filter-gratuitous false
+   cpudefend arp-filter filter-mac-illegal false
+   cpudefend arp-filter filter-tha-filled-request false
+   ipv4 unnumbered-address unnumbered-if-name LoopBack1
+   tunnel-protocol te-tunnel common-attributes signal-protocol segment-routing
+   tunnel-protocol te-tunnel common-attributes tunnel-id 1
+   tunnel-protocol te-tunnel common-attributes egress-lsr-id 1.1.1.1
+   tunnel-protocol te-tunnel common-attributes reserved-for-binding false
+   tunnel-protocol te-tunnel common-attributes lsp-tp-outbound false
+   tunnel-protocol te-tunnel common-attributes statistic-enable false
+   tunnel-protocol te-tunnel sr-te bandwidth 0
+   tunnel-protocol te-tunnel sr-te setup-priority 7
+   tunnel-protocol te-tunnel sr-te hold-priority 7
+   tunnel-protocol te-tunnel sr-te pce-delegate no
+   tunnel-protocol te-tunnel sr-te split-tunnel false
+   tunnel-protocol te-tunnel sr-te path-verification inherit
+   tunnel-protocol te-tunnel sr-te adjacency-sid false
+   tunnel-protocol te-tunnel sr-te lsp-paths lsp-path primary
+    hop-limit   32
+    include-any 0x0
+    exclude-any 0x0
+   !
+   tunnel-protocol te-tunnel sr-te bfd-for-lsp detect-multiplier 3
+   tunnel-protocol te-tunnel sr-te bfd-for-tunnel detect-multiplier 3
+   tunnel-protocol te-tunnel igp-attr adv-enable false
+   tunnel-protocol te-tunnel igp-attr adv-ipv6-enable false
+   tunnel-protocol te-tunnel igp-attr hold-time 0
+   tunnel-protocol te-tunnel igp-attr shortcut-type isis
+   tunnel-protocol te-tunnel igp-attr absolute 5
+  !
+  mpls common global mpls-enable true
+  mpls common global lsr-id 2.2.2.2
+  mpls common global null-lable-type non-null
+  mpls common global diff-serv-mode uniform
+  mpls common global te-ttl-mode uniform
+  mpls common global ldp-ttl-mode uniform
+  mpls common global sr-ttl-mode uniform
+  mpls common global ftn-delay-time 0
+  mpls common global mpls-mtu-independent false
+  mpls common global entropy-label-capability false
+  mpls common global bgp-ttl-mode ttl-mode pipe
+  mpls common global ttl-expiration-pop switch-flag true
+  mpls common threshold-alarm autobypass-tunnel-number upper-value 80
+  mpls common threshold-alarm autobypass-tunnel-number lower-value 75
+  mpls common threshold-alarm autoprimary-tunnel-number upper-value 80
+  mpls common threshold-alarm autoprimary-tunnel-number lower-value 75
+  mpls common threshold-alarm ldp-lsp-number upper-value 80
+  mpls common threshold-alarm ldp-lsp-number lower-value 75
+  mpls common threshold-alarm outsegment-number upper-value 80
+  mpls common threshold-alarm outsegment-number lower-value 75
+  mpls common threshold-alarm remote-adjacency-number upper-value 80
+  mpls common threshold-alarm remote-adjacency-number lower-value 75
+  mpls common threshold-alarm mldp-tree-number upper-value 80
+  mpls common threshold-alarm mldp-tree-number lower-value 75
+  mpls common threshold-alarm mldp-branch-number upper-value 80
+  mpls common threshold-alarm mldp-branch-number lower-value 75
+  mpls common threshold-alarm rsvp-lsp-number upper-value 80
+  mpls common threshold-alarm rsvp-lsp-number lower-value 75
+  mpls common threshold-alarm dynamic-label-number upper-value 80
+  mpls common threshold-alarm dynamic-label-number lower-value 70
+  mpls ldp enable          false
+  mpls ldp lsp-trigger-mode host
+  mpls ldp proxy-egress-lsp-disable false
+  mpls ldp bgp-label       false
+  mpls ldp sr-lsp-trigger-mode none
+  mpls ldp bfd p2p detect-multiplier 3
+  mpls ldp bfd p2p tunnel-detect-multiplier 3
+  mpls ldp bfd mldp p2mp-tunnel-dm 3
+  mpls te enable true
+  mpls te global switch-delay-time 5000
+  mpls te global delete-delay-time 20000
+  mpls te global frr-timer-weight 300
+  mpls te global pce-delegate   no
+  mpls te global pce-inter-layer-delegate false
+  mpls te global pce-cleanup-lsp-state false
+  mpls te global pce-cleanup-initiated-lsp false
+  mpls te global pce-clean-stitch-label false
+  mpls te global lsp-loopback-clear-time 5
+  mpls te global ip-prefix-delete-time 300
+  mpls te global slsp-deduct-rsvp-bandwidth false
+  mpls te global reoptimization-link-disable true
+  mpls te global rsvp-entropy-label false
+  mpls te global bandwidth-auto-config-disable false
+  mpls te global suppress-flapping-disable false
+  mpls te global path-verification false
+  mpls te global soft-preemption false
+  mpls te global self-ping      false
+  mpls te global self-ping-duration 1800
+  mpls te global p2mp-enable    false
+  mpls te global p2mp-auto-frr  false
+  mpls te global p2mp-frr-mbb-type sub-lsp
+  mpls te global auto-frr-enable false
+  mpls te global auto-frr-reoptimization false
+  mpls te global auto-bandwidth-enable false
+  mpls te global flood-bandwidth-enable false
+  mpls te global ds-te-mode     non-ietf
+  mpls te rsvp enable false
+  mpls te cspf enable             true
+  mpls te cspf preferred-igp      ospf
+  mpls te cspf multi-instances-short-path-mode disable
+  mpls te cspf tie-breaking       random
+  mpls te cspf path-metric-type   te
+  mpls te cspf srlg-path-calculate-mode default
+  mpls te cspf fast-notice        false
+  mpls te cspf disable-optimize-mode false
+  mpls te bfd-for-lsp detect-multiplier 3
+  mpls te bfd-for-tunnel detect-multiplier 3
+  mplsoam global oam-enable false
+  network-instance instances instance _public_
+   isis sites site 1
+    level             level-2
+    shutdown          false
+    cost-style        wide
+    direct-inherit    false
+    adv-one-intf-addr false
+    lsp-fragments-extend enable-level1 false
+    lsp-fragments-extend enable-level2 false
+    poi-tlv enable false
+    lsdb-limit enable false
+    suppress-flapping peer enable true
+    suppress-flapping lsp-flood interval 10
+    suppress-flapping lsp-flood threshold 30
+    suppress-flapping route-calculate interval 10
+    suppress-flapping route-calculate threshold 30
+    suppress-flapping lsp-generation interval 10
+    suppress-flapping lsp-generation threshold 30
+    timer lsp-max   1200
+    timer lsp-refresh 900
+    timer purge-lsp-delay 20
+    timer spf max 5
+    timer spf init 50
+    timer spf incr 200
+    timer lsp-generation max-level1 2
+    timer lsp-generation max-level2 2
+    lsp-length originate-level1 1497
+    lsp-length originate-level2 1497
+    lsp-length receive 1497
+    set-overload type no-set
+    lsp-lifetime enable true
+    lsp-lifetime max-age
+    bgp-ls enable-level1 false
+    bgp-ls enable-level2 false
+    bgp-ls enable-ipv6-level1 false
+    bgp-ls enable-ipv6-level2 false
+    bier enable false
+    extern-ability adj-strict-check false
+    extern-ability ecmp-prefer none
+    extern-ability opt-checksum false
+    extern-ability virtual-cluster false
+    extern-ability virtual-access false
+    local-mt enable false
+    net-entitys net-entity 10.0000.0000.0002.00
+    !
+    circuits circuit 25GE3/0/0
+     level                    level-1-2
+     p2p-enable               false
+     hello-mode               normal
+     silent-enable            false
+     purge-source-trace-block false
+     mesh-group state inactive
+     suppress-flapping peer enable true
+     suppress-flapping peer detect-interval 60
+     suppress-flapping peer threshold 10
+     suppress-flapping peer resume-interval 120
+     suppress-flapping peer hold-max-cost true
+     timer csnp-interval-level1 10
+     timer csnp-interval-level2 10
+     timer throttle-interval 50
+     timer throttle-count 10
+     broadcast dis-priority-level1 64
+     broadcast dis-priority-level2 64
+     broadcast hello-timer-level1 10
+     broadcast hello-timer-level2 10
+     broadcast hold-multiplier-level1 3
+     broadcast hold-multiplier-level2 3
+     broadcast conser-level1 false
+     broadcast conser-level2 false
+     afs af afipv4
+      tag-level1     0
+      tag-level2     0
+      suppress-reach no-set
+      bfd-bit-error  no-set
+      mpls-ldp auto-flag-block false
+      frr lfa-block-level1 false
+      frr lfa-block-level2 false
+      frr rlfa-disable-level1 false
+      frr rlfa-disable-level2 false
+      frr tilfa-disable-level1 false
+      frr tilfa-disable-level2 false
+      bfd min-rx        10
+      bfd min-tx        10
+      bfd detect-multiplier 3
+      bfd frr-binding   false
+      ldp-sync enable none
+     !
+    !
+    circuits circuit 25GE3/0/70
+     level                    level-1-2
+     p2p-enable               false
+     hello-mode               normal
+     silent-enable            false
+     purge-source-trace-block false
+     mesh-group state inactive
+     suppress-flapping peer enable true
+     suppress-flapping peer detect-interval 60
+     suppress-flapping peer threshold 10
+     suppress-flapping peer resume-interval 120
+     suppress-flapping peer hold-max-cost true
+     timer csnp-interval-level1 10
+     timer csnp-interval-level2 10
+     timer throttle-interval 50
+     timer throttle-count 10
+     broadcast dis-priority-level1 64
+     broadcast dis-priority-level2 64
+     broadcast hello-timer-level1 10
+     broadcast hello-timer-level2 10
+     broadcast hold-multiplier-level1 3
+     broadcast hold-multiplier-level2 3
+     broadcast conser-level1 false
+     broadcast conser-level2 false
+     afs af afipv4
+      tag-level1     0
+      tag-level2     0
+      suppress-reach no-set
+      bfd-bit-error  no-set
+      mpls-ldp auto-flag-block false
+      frr lfa-block-level1 false
+      frr lfa-block-level2 false
+      frr rlfa-disable-level1 false
+      frr rlfa-disable-level2 false
+      frr tilfa-disable-level1 false
+      frr tilfa-disable-level2 false
+      bfd min-rx        10
+      bfd min-tx        10
+      bfd detect-multiplier 3
+      bfd frr-binding   false
+      ldp-sync enable none
+     !
+    !
+    circuits circuit LoopBack1
+     level                    level-1-2
+     p2p-enable               true
+     hello-mode               normal
+     silent-enable            false
+     purge-source-trace-block false
+     mesh-group state inactive
+     suppress-flapping peer enable true
+     suppress-flapping peer detect-interval 60
+     suppress-flapping peer threshold 10
+     suppress-flapping peer resume-interval 120
+     suppress-flapping peer hold-max-cost true
+     timer csnp-interval-level1 10
+     timer csnp-interval-level2 10
+     timer throttle-interval 50
+     timer throttle-count 10
+     p2p snpa-check          false
+     p2p peer-ip-ignore      false
+     p2p ppp-negotiation     3-way
+     p2p hello-timer         10
+     p2p hold-multiplier     3
+     p2p lsp-retransmit-interval 5
+     p2p ppp-osicp-check     false
+     p2p conser              false
+     afs af afipv4
+      tag-level1     0
+      tag-level2     0
+      suppress-reach no-set
+      mpls-ldp auto-flag-block false
+      frr lfa-block-level1 false
+      frr lfa-block-level2 false
+      frr rlfa-disable-level1 false
+      frr rlfa-disable-level2 false
+      frr tilfa-disable-level1 false
+      frr tilfa-disable-level2 false
+      ldp-sync enable none
+      prefix-sids prefix-sid 0
+       type      index
+       label     200
+       node-flag true
+      !
+     !
+    !
+    circuits circuit Tunnel1
+     level                    level-1-2
+     p2p-enable               true
+     hello-mode               normal
+     silent-enable            false
+     purge-source-trace-block false
+     mesh-group state inactive
+     suppress-flapping peer enable true
+     suppress-flapping peer detect-interval 60
+     suppress-flapping peer threshold 10
+     suppress-flapping peer resume-interval 120
+     suppress-flapping peer hold-max-cost true
+     timer csnp-interval-level1 10
+     timer csnp-interval-level2 10
+     timer throttle-interval 50
+     timer throttle-count 10
+     p2p snpa-check          false
+     p2p peer-ip-ignore      false
+     p2p ppp-negotiation     3-way
+     p2p hello-timer         10
+     p2p hold-multiplier     3
+     p2p lsp-retransmit-interval 5
+     p2p ppp-osicp-check     false
+     p2p conser              false
+     afs af afipv4
+      tag-level1     0
+      tag-level2     0
+      suppress-reach no-set
+      mpls-ldp auto-flag-block false
+      frr lfa-block-level1 false
+      frr lfa-block-level2 false
+      frr rlfa-disable-level1 false
+      frr rlfa-disable-level2 false
+      frr tilfa-disable-level1 false
+      frr tilfa-disable-level2 false
+      ldp-sync enable none
+     !
+    !
+    afs af afipv4
+     apply-qppb         false
+     max-load-balancing 64
+     auto-cost          false
+     bandwidth          100
+     bfd-bit-error      false
+     attach-bit adv-control no-type
+     attach-bit avoid-learn false
+     preference value 15
+     leak-route-level1-to-level2 enable true
+     leak-route-level1-to-level2 tag 0
+     leak-route-level1-to-level2 allow-filter false
+     leak-route-level1-to-level2 nosidflag false
+     traffic-eng enable-level1 false
+     traffic-eng enable-level2 true
+     traffic-eng metric-delay adv-level1 false
+     traffic-eng metric-delay adv-level2 false
+     bfd enable        false
+     bfd frr-binding   false
+     bfd detect-multiplier 3
+     ldp-sync enable false
+     ldp-sync infinite
+     mpls-ldp-global auto-flag false
+     advertise-link-attributes enable false
+     frr enable false
+     frr remote-lfa rlfa-level1 false
+     frr remote-lfa rlfa-level2 false
+     frr tiebreaker node-protect-level1 40
+     frr tiebreaker node-protect-level2 40
+     frr tiebreaker lowest-cost-level1 20
+     frr tiebreaker lowest-cost-level2 20
+     frr tiebreaker non-ecmp-level1 10
+     frr tiebreaker non-ecmp-level2 10
+     frr tiebreaker srlg-disjoint-level1 5
+     frr tiebreaker srlg-disjoint-level2 5
+     frr tiebreaker hold-max-cost-level1 15
+     frr tiebreaker hold-max-cost-level2 15
+     frr tilfa enable-level1 false
+     frr tilfa enable-level2 false
+     segment-routing enable true
+     segment-routing auto-adj-sid true
+     segment-routing adv-static-sid false
+     segment-routing binding receive true
+     segment-routing binding advertise false
+     segment-routing lsp-trigger type host
+    !
+    avoid-micro-loop frr-enable false
+    avoid-micro-loop frr-rib-update-delay 100
+    avoid-micro-loop sr-enable false
+    avoid-micro-loop sr-rib-update-delay 5000
+    avoid-micro-loop te-tunnel-enable false
+    avoid-micro-loop te-tunnel-delay 1000
+    avoid-micro-loop sr-enable-flag false
+    avoid-micro-loop sr-new-update-delay 5000
+    srgbs srgb 16000 35000
+    !
+   !
+   mpls common mpls-interfaces mpls-interface 25GE3/0/0
+   !
+   segment-routing enable true
+   segment-routing tunnel-prefer ldp
+   segment-routing traffic-stats mode none
+   segment-routing srpolicy policy-attributes delete-delay 20000
+   segment-routing srpolicy policy-attributes hsb-enable false
+   segment-routing srpolicy policy-attributes traffic-statistics-enable false
+   segment-routing srpolicy policy-attributes bgp-ls-enable false
+   segment-routing srpolicy policy-attributes policy-threshold-upper 80
+   segment-routing srpolicy policy-attributes policy-threshold-lower 75
+   segment-routing srpolicy policy-attributes list-threshold-upper 80
+   segment-routing srpolicy policy-attributes list-threshold-lower 75
+   segment-routing srpolicy policy-attributes bfd enable disable
+   segment-routing srpolicy policy-attributes bfd min-tx 10
+   segment-routing srpolicy policy-attributes bfd min-rx 10
+   segment-routing srpolicy policy-attributes bfd multi-num 3
+   te interfaces interface 25GE3/0/0
+    mpls-te-enable  true
+    p2mp-te-disable false
+    attribute admin-groups 0x0
+    attribute bandwidth max-reserved 0
+    attribute bandwidth bc0 0
+    attribute bandwidth change-threshold-down 10
+    attribute bandwidth change-threshold-up 10
+    mpls-te-attribute auto-frr-mode default
+    mpls-te-attribute auto-frr-attributes bandwidth 0
+    mpls-te-attribute auto-frr-attributes setup-priority 7
+    mpls-te-attribute auto-frr-attributes hold-priority 7
+    mpls-te-attribute auto-frr-attributes hop-limit 32
+    mpls-te-attribute auto-frr-attributes include-any 0x0
+    mpls-te-attribute auto-frr-attributes exclude-any 0x0
+   !
+  !
+ !
+!
+admin@ncs(config)# commit
+Tue Nov  17 16:02:51.384 UTC+00:00
+Commit complete.
+admin@ncs(config)# rollback configuration 
+Tue Nov  17 16:17:27.101 UTC+00:00
+admin@ncs(config)# show c
+Tue Nov  17 16:17:51.438 UTC+00:00
+devices device hw1
+ config
+  no bgp-lsp bfd parameters detection-multiplier 3
+  ifm interfaces interface GigabitEthernet0/1/0
+   no ipv4 addresses address 10.1.1.2
+  !
+  ifm interfaces interface GigabitEthernet0/1/9
+   no ipv4 addresses address 20.0.1.1
+  !
+  network-instance instances instance _public_
+   isis sites site 1
+    no circuits circuit Tunnel1
+   !
+  !
+  no ifm interfaces interface Tunnel1
+  network-instance instances instance _public_
+   isis sites site 1
+    no circuits circuit LoopBack1
+   !
+  !
+  no ifm interfaces interface LoopBack1
+  mpls common global mpls-enable false
+  no mpls common global lsr-id 1.1.1.1
+  no mpls common global null-lable-type non-null
+  no mpls common global diff-serv-mode uniform
+  no mpls common global te-ttl-mode uniform
+  no mpls common global ldp-ttl-mode uniform
+  no mpls common global sr-ttl-mode uniform
+  no mpls common global ftn-delay-time 0
+  no mpls common global mpls-mtu-independent false
+  no mpls common global entropy-label-capability false
+  no mpls common global bgp-ttl-mode ttl-mode pipe
+  no mpls common global ttl-expiration-pop switch-flag true
+  no mpls common threshold-alarm autobypass-tunnel-number upper-value 80
+  no mpls common threshold-alarm autobypass-tunnel-number lower-value 75
+  no mpls common threshold-alarm autoprimary-tunnel-number upper-value 80
+  no mpls common threshold-alarm autoprimary-tunnel-number lower-value 75
+  no mpls common threshold-alarm ldp-lsp-number upper-value 80
+  no mpls common threshold-alarm ldp-lsp-number lower-value 75
+  no mpls common threshold-alarm outsegment-number upper-value 80
+  no mpls common threshold-alarm outsegment-number lower-value 75
+  no mpls common threshold-alarm remote-adjacency-number upper-value 80
+  no mpls common threshold-alarm remote-adjacency-number lower-value 75
+  no mpls common threshold-alarm mldp-tree-number upper-value 80
+  no mpls common threshold-alarm mldp-tree-number lower-value 75
+  no mpls common threshold-alarm mldp-branch-number upper-value 80
+  no mpls common threshold-alarm mldp-branch-number lower-value 75
+  no mpls common threshold-alarm rsvp-lsp-number upper-value 80
+  no mpls common threshold-alarm rsvp-lsp-number lower-value 75
+  no mpls common threshold-alarm dynamic-label-number upper-value 80
+  no mpls common threshold-alarm dynamic-label-number lower-value 70
+  no mpls ldp enable          false
+  no mpls ldp lsp-trigger-mode host
+  no mpls ldp proxy-egress-lsp-disable false
+  no mpls ldp bgp-label       false
+  no mpls ldp sr-lsp-trigger-mode none
+  no mpls ldp bfd p2p detect-multiplier 3
+  no mpls ldp bfd p2p tunnel-detect-multiplier 3
+  no mpls ldp bfd mldp p2mp-tunnel-dm 3
+  no mpls te enable true
+  no mpls te global switch-delay-time 5000
+  no mpls te global delete-delay-time 20000
+  no mpls te global frr-timer-weight 300
+  no mpls te global pce-delegate   no
+  no mpls te global pce-inter-layer-delegate false
+  no mpls te global pce-cleanup-lsp-state false
+  no mpls te global pce-cleanup-initiated-lsp false
+  no mpls te global pce-clean-stitch-label false
+  no mpls te global lsp-loopback-clear-time 5
+  no mpls te global ip-prefix-delete-time 300
+  no mpls te global slsp-deduct-rsvp-bandwidth false
+  no mpls te global reoptimization-link-disable true
+  no mpls te global rsvp-entropy-label false
+  no mpls te global bandwidth-auto-config-disable false
+  no mpls te global suppress-flapping-disable false
+  no mpls te global path-verification false
+  no mpls te global soft-preemption false
+  no mpls te global self-ping      false
+  no mpls te global self-ping-duration 1800
+  no mpls te global p2mp-enable    false
+  no mpls te global p2mp-auto-frr  false
+  no mpls te global p2mp-frr-mbb-type sub-lsp
+  no mpls te global auto-frr-enable false
+  no mpls te global auto-frr-reoptimization false
+  no mpls te global auto-bandwidth-enable false
+  no mpls te global flood-bandwidth-enable false
+  no mpls te global ds-te-mode     non-ietf
+  no mpls te rsvp enable false
+  no mpls te cspf enable             true
+  no mpls te cspf preferred-igp      ospf
+  no mpls te cspf multi-instances-short-path-mode disable
+  no mpls te cspf tie-breaking       random
+  no mpls te cspf path-metric-type   te
+  no mpls te cspf srlg-path-calculate-mode default
+  no mpls te cspf fast-notice        false
+  no mpls te cspf disable-optimize-mode false
+  no mpls te bfd-for-lsp detect-multiplier 3
+  no mpls te bfd-for-tunnel detect-multiplier 3
+  no mplsoam global oam-enable false
+  network-instance instances instance _public_
+   no isis sites site 1
+   no mpls common mpls-interfaces mpls-interface GigabitEthernet0/1/0
+   segment-routing enable false
+   no segment-routing tunnel-prefer ldp
+   no segment-routing traffic-stats mode none
+   no segment-routing srpolicy policy-attributes delete-delay 20000
+   no segment-routing srpolicy policy-attributes hsb-enable false
+   no segment-routing srpolicy policy-attributes traffic-statistics-enable false
+   no segment-routing srpolicy policy-attributes bgp-ls-enable false
+   no segment-routing srpolicy policy-attributes policy-threshold-upper 80
+   no segment-routing srpolicy policy-attributes policy-threshold-lower 75
+   no segment-routing srpolicy policy-attributes list-threshold-upper 80
+   no segment-routing srpolicy policy-attributes list-threshold-lower 75
+   no segment-routing srpolicy policy-attributes bfd enable disable
+   no segment-routing srpolicy policy-attributes bfd min-tx 10
+   no segment-routing srpolicy policy-attributes bfd min-rx 10
+   no segment-routing srpolicy policy-attributes bfd multi-num 3
+   no te interfaces interface GigabitEthernet0/1/0
+  !
+ !
+!
+devices device hwx4
+ config
+  no bgp-lsp bfd parameters detection-multiplier 3
+  ifm interfaces interface 25GE3/0/0
+   no ipv4 addresses address 10.1.1.1
+  !
+  ifm interfaces interface 25GE3/0/70
+   no ipv4 addresses address 30.0.1.1
+  !
+  no ifm interfaces interface LoopBack1
+  no ifm interfaces interface Tunnel1
+  mpls common global mpls-enable false
+  no mpls common global lsr-id 2.2.2.2
+  no mpls common global null-lable-type non-null
+  no mpls common global diff-serv-mode uniform
+  no mpls common global te-ttl-mode uniform
+  no mpls common global ldp-ttl-mode uniform
+  no mpls common global sr-ttl-mode uniform
+  no mpls common global ftn-delay-time 0
+  no mpls common global mpls-mtu-independent false
+  no mpls common global entropy-label-capability false
+  no mpls common global bgp-ttl-mode ttl-mode pipe
+  no mpls common global ttl-expiration-pop switch-flag true
+  no mpls common threshold-alarm autobypass-tunnel-number upper-value 80
+  no mpls common threshold-alarm autobypass-tunnel-number lower-value 75
+  no mpls common threshold-alarm autoprimary-tunnel-number upper-value 80
+  no mpls common threshold-alarm autoprimary-tunnel-number lower-value 75
+  no mpls common threshold-alarm ldp-lsp-number upper-value 80
+  no mpls common threshold-alarm ldp-lsp-number lower-value 75
+  no mpls common threshold-alarm outsegment-number upper-value 80
+  no mpls common threshold-alarm outsegment-number lower-value 75
+  no mpls common threshold-alarm remote-adjacency-number upper-value 80
+  no mpls common threshold-alarm remote-adjacency-number lower-value 75
+  no mpls common threshold-alarm mldp-tree-number upper-value 80
+  no mpls common threshold-alarm mldp-tree-number lower-value 75
+  no mpls common threshold-alarm mldp-branch-number upper-value 80
+  no mpls common threshold-alarm mldp-branch-number lower-value 75
+  no mpls common threshold-alarm rsvp-lsp-number upper-value 80
+  no mpls common threshold-alarm rsvp-lsp-number lower-value 75
+  no mpls common threshold-alarm dynamic-label-number upper-value 80
+  no mpls common threshold-alarm dynamic-label-number lower-value 70
+  no mpls ldp enable          false
+  no mpls ldp lsp-trigger-mode host
+  no mpls ldp proxy-egress-lsp-disable false
+  no mpls ldp bgp-label       false
+  no mpls ldp sr-lsp-trigger-mode none
+  no mpls ldp bfd p2p detect-multiplier 3
+  no mpls ldp bfd p2p tunnel-detect-multiplier 3
+  no mpls ldp bfd mldp p2mp-tunnel-dm 3
+  no mpls te enable true
+  no mpls te global switch-delay-time 5000
+  no mpls te global delete-delay-time 20000
+  no mpls te global frr-timer-weight 300
+  no mpls te global pce-delegate   no
+  no mpls te global pce-inter-layer-delegate false
+  no mpls te global pce-cleanup-lsp-state false
+  no mpls te global pce-cleanup-initiated-lsp false
+  no mpls te global pce-clean-stitch-label false
+  no mpls te global lsp-loopback-clear-time 5
+  no mpls te global ip-prefix-delete-time 300
+  no mpls te global slsp-deduct-rsvp-bandwidth false
+  no mpls te global reoptimization-link-disable true
+  no mpls te global rsvp-entropy-label false
+  no mpls te global bandwidth-auto-config-disable false
+  no mpls te global suppress-flapping-disable false
+  no mpls te global path-verification false
+  no mpls te global soft-preemption false
+  no mpls te global self-ping      false
+  no mpls te global self-ping-duration 1800
+  no mpls te global p2mp-enable    false
+  no mpls te global p2mp-auto-frr  false
+  no mpls te global p2mp-frr-mbb-type sub-lsp
+  no mpls te global auto-frr-enable false
+  no mpls te global auto-frr-reoptimization false
+  no mpls te global auto-bandwidth-enable false
+  no mpls te global flood-bandwidth-enable false
+  no mpls te global ds-te-mode     non-ietf
+  no mpls te rsvp enable false
+  no mpls te cspf enable             true
+  no mpls te cspf preferred-igp      ospf
+  no mpls te cspf multi-instances-short-path-mode disable
+  no mpls te cspf tie-breaking       random
+  no mpls te cspf path-metric-type   te
+  no mpls te cspf srlg-path-calculate-mode default
+  no mpls te cspf fast-notice        false
+  no mpls te cspf disable-optimize-mode false
+  no mpls te bfd-for-lsp detect-multiplier 3
+  no mpls te bfd-for-tunnel detect-multiplier 3
+  no mplsoam global oam-enable false
+  network-instance instances instance _public_
+   no isis sites site 1
+   no mpls common mpls-interfaces mpls-interface 25GE3/0/0
+   segment-routing enable false
+   no segment-routing tunnel-prefer ldp
+   no segment-routing traffic-stats mode none
+   no segment-routing srpolicy policy-attributes delete-delay 20000
+   no segment-routing srpolicy policy-attributes hsb-enable false
+   no segment-routing srpolicy policy-attributes traffic-statistics-enable false
+   no segment-routing srpolicy policy-attributes bgp-ls-enable false
+   no segment-routing srpolicy policy-attributes policy-threshold-upper 80
+   no segment-routing srpolicy policy-attributes policy-threshold-lower 75
+   no segment-routing srpolicy policy-attributes list-threshold-upper 80
+   no segment-routing srpolicy policy-attributes list-threshold-lower 75
+   no segment-routing srpolicy policy-attributes bfd enable disable
+   no segment-routing srpolicy policy-attributes bfd min-tx 10
+   no segment-routing srpolicy policy-attributes bfd min-rx 10
+   no segment-routing srpolicy policy-attributes bfd multi-num 3
+   no te interfaces interface 25GE3/0/0
+  !
+ !
+!
+admin@ncs(config)# commit
+Tue Nov  17 16:18:49.908 UTC+00:00
+Commit complete.

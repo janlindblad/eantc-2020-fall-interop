@@ -1,0 +1,175 @@
+/*
+Copyright (C) 2019 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-pic-notification-deviations-NE8000 {
+  namespace "urn:huawei:yang:huawei-pic-notification-deviations-NE8000";
+  prefix pic-notification-devs-NE8000;
+
+  import huawei-pic-notification {
+    prefix pic-notification;
+  }
+
+  organization
+    "Huawei Technologies Co., Ltd.";
+
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+
+  description
+    "This module defines deviation statements for huawei-pic-notification module.";
+
+  revision 2019-11-06 {
+    description
+      "Initial revision.";
+    reference
+      "Huawei private.";
+  }
+
+  deviation "/pic-notification:flow-control-pause-frame-abnormal" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:flow-control-pause-frame-abnormal-resume" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:resource-dead-line" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:resource-dead-line-resume" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:upstream-pcm" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:upstream-pcm-resume" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:input-error-exceed" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:input-error-exceed-resume" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:laser-shut" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:laser-shut-resume" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:negotiation-failed" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:negotiation-failed-resume" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:crc-error-warning" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:crc-error-warning-resume" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:port-mode-change" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:port-type-change" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:remote-defect" {
+    deviate not-supported;
+  }
+  deviation "/pic-notification:remote-defect-resume" {
+    deviate not-supported;
+  }
+
+  deviation /pic-notification:tim-trace-mismatch {
+    deviate not-supported;
+  }
+  deviation /pic-notification:tim-trace-mismatch-resume {
+    deviate not-supported;
+  }
+  deviation /pic-notification:section-alignment {
+    deviate not-supported;
+  }
+  deviation /pic-notification:section-alignment-resume {
+    deviate not-supported;
+  }
+  deviation /pic-notification:port-physical-down {
+    deviate not-supported;
+  }
+  deviation /pic-notification:port-physical-up {
+    deviate not-supported;
+  }
+  deviation /pic-notification:path-trace-mismatch {
+    deviate not-supported;
+  }
+  deviation /pic-notification:path-trace-mismatch-resume {
+    deviate not-supported;
+  }
+  deviation /pic-notification:otu-signal-fail {
+    deviate not-supported;
+  }
+  deviation /pic-notification:otu-signal-fail-resume {
+    deviate not-supported;
+  }
+  deviation /pic-notification:otu-signal-degrade {
+    deviate not-supported;
+  }
+  deviation /pic-notification:otu-signal-degrade-resume {
+    deviate not-supported;
+  }
+  deviation /pic-notification:otu-indication-signal {
+    deviate not-supported;
+  }
+  deviation /pic-notification:otu-indication-signal-resume {
+    deviate not-supported;
+  }
+  deviation /pic-notification:odu-signal-degrade {
+    deviate not-supported;
+  }
+  deviation /pic-notification:odu-signal-degrade-resume {
+    deviate not-supported;
+  }
+  deviation /pic-notification:odu-open-connection {
+    deviate not-supported;
+  }
+  deviation /pic-notification:odu-open-connection-resume {
+    deviate not-supported;
+  }
+  deviation /pic-notification:odu-locked-signal {
+    deviate not-supported;
+  }
+  deviation /pic-notification:odu-locked-signal-resume {
+    deviate not-supported;
+  }
+  deviation /pic-notification:odu-indication-signal {
+    deviate not-supported;
+  }
+  deviation /pic-notification:odu-indication-signal-resume {
+    deviate not-supported;
+  }
+  deviation /pic-notification:post-fec-error-resume {
+    deviate not-supported;
+  }
+  deviation /pic-notification:post-fec-error-rising {
+    deviate not-supported;
+  }
+  deviation /pic-notification:upstream-e3 {
+    deviate not-supported;
+  }
+  deviation /pic-notification:upstream-e3-resume {
+    deviate not-supported;
+  }
+  deviation /pic-notification:remote-e3 {
+    deviate not-supported;
+  }
+  deviation /pic-notification:remote-e3-resume {
+    deviate not-supported;
+  }
+  deviation /pic-notification:upstream-e1-cpos {
+    deviate not-supported;
+  }
+}

@@ -1,0 +1,64 @@
+Sample Bindings
+
+evpn-template:
+DEVICE = hw1 | hwx4
+INTERFACE = GigabitEthernet0/1/0 | 25GE3/0/0
+
+interface-template:
+DEVICE = hw1 | hwx4
+INTERFACE = GigabitEthernet0/1/0 | 25GE3/0/0
+IP = 10.1.1.2 | 10.1.1.1
+MASK = 255.255.255.0
+
+interface-template:
+DEVICE = hw1 | hwx4
+INTERFACE = GigabitEthernet0/1/9 | 25GE3/0/70
+IP = 20.0.1.1 | 30.0.1.1
+MASK = 255.255.255.0
+
+loopback-interface-template:
+DEVICE = hw1 | hwx4
+INTERFACE = LoopBack1
+IP = 1.1.1.1 | 2.2.2.2
+MASK = 255.255.255.255
+
+tunnel-interface-template:
+DEVICE = hw1 | hwx4
+INTERFACE = Tunnel1
+LOOPBACK = LoopBack1
+EGRESS_LSR_ID = 2.2.2.2 | 1.1.1.1
+SHORTCUT_TYPE = both | isis                                     <== ???
+
+mpls-template:
+DEVICE = hw1 | hwx4
+LSR_ID = 1.1.1.1 | 2.2.2.2
+
+isis-site-template:
+DEVICE = hw1 | hwx4
+SITE_ID = 1
+ISIS_NET_ENTITY = 10.0000.0000.0001.00 | 10.0000.0000.0002.00
+APPLY_QPPB = 'none' | 'false'                                   <== ???
+
+isis-circuit-template:
+DEVICE = hw1 | hwx4
+SITE_ID = 1
+INTERFACE = GigabitEthernet0/1/0 | 25GE3/0/0
+
+isis-circuit-template:
+DEVICE = hw1 | hwx4
+SITE_ID = 1
+INTERFACE = GigabitEthernet0/1/9 | 25GE3/0/70
+
+isis-soft-circuit-template:
+DEVICE = hw1 | hwx4
+SITE_ID = 1
+HAS_PREFIX_SID = 'true'                                         <== ???
+LABEL = 100 | 200
+INTERFACE = LoopBack1
+
+isis-soft-circuit-template:
+DEVICE = hw1 | hwx4
+SITE_ID = 1
+HAS_PREFIX_SID = 'false'
+LABEL = n/a
+INTERFACE = Tunnel1

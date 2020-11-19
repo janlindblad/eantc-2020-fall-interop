@@ -1,0 +1,107 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0">
+ <devices xmlns="http://tail-f.com/ns/ncs">
+  <device tags="nocreate">
+    <name>{$DEVICE}</name>
+    <config>
+      <ifm xmlns="urn:huawei:yang:huawei-ifm">
+        <interfaces>
+          <interface tags="merge">
+            <name>{$INTERFACE}</name>
+            <class>main-interface</class>
+            <type>Tunnel</type>
+            <number>1</number>
+            <admin-status>up</admin-status>
+            <router-type>PtoP</router-type>
+            <clear-ip-df>false</clear-ip-df>
+            <link-up-down-trap-enable>true</link-up-down-trap-enable>
+            <statistic-enable>true</statistic-enable>
+            <statistic-mode>interface-based</statistic-mode>
+            <mtu>1500</mtu>
+            <spread-mtu-flag>false</spread-mtu-flag>
+            <vrf-name>_public_</vrf-name>
+            <l2-mode-enable>false</l2-mode-enable>
+            <cpudefend xmlns="urn:huawei:yang:huawei-cpudefend">
+              <arp-safeguards>
+                <arp-safeguard>false</arp-safeguard>
+              </arp-safeguards>
+              <arp-vlan-car>
+                <rate-limit>20</rate-limit>
+              </arp-vlan-car>
+              <nd-vlan-cars>
+                <nd-vlan-car>
+                  <type>na</type>
+                  <rate-limit>100</rate-limit>
+                </nd-vlan-car>
+                <nd-vlan-car>
+                  <type>ns-unicast</type>
+                  <rate-limit>100</rate-limit>
+                </nd-vlan-car>
+                <nd-vlan-car>
+                  <type>ns-multicast</type>
+                  <rate-limit>100</rate-limit>
+                </nd-vlan-car>
+              </nd-vlan-cars>
+              <arp-check>
+                <check-destination-ip>false</check-destination-ip>
+              </arp-check>
+              <arp-filter>
+                <filter-gratuitous>false</filter-gratuitous>
+                <filter-mac-illegal>false</filter-mac-illegal>
+                <filter-tha-filled-request>false</filter-tha-filled-request>
+              </arp-filter>
+            </cpudefend>
+            <ipv4 xmlns="urn:huawei:yang:huawei-ip">
+              <unnumbered-address>
+                <unnumbered-if-name>{$LOOPBACK}</unnumbered-if-name>
+              </unnumbered-address>
+            </ipv4>
+            <tunnel-protocol xmlns="urn:huawei:yang:huawei-tunnel-management">
+              <te-tunnel xmlns="urn:huawei:yang:huawei-mpls-te">
+                <common-attributes>
+                  <signal-protocol>segment-routing</signal-protocol>
+                  <tunnel-id>1</tunnel-id>
+                  <egress-lsr-id>{$EGRESS_LSR_ID}</egress-lsr-id>
+                  <reserved-for-binding>false</reserved-for-binding>
+                  <lsp-tp-outbound>false</lsp-tp-outbound>
+                  <statistic-enable>false</statistic-enable>
+                </common-attributes>
+                <sr-te>
+                  <bandwidth>0</bandwidth>
+                  <setup-priority>7</setup-priority>
+                  <hold-priority>7</hold-priority>
+                  <pce-delegate>no</pce-delegate>
+                  <split-tunnel>false</split-tunnel>
+                  <path-verification>inherit</path-verification>
+                  <adjacency-sid>false</adjacency-sid>
+                  <lsp-paths>
+                    <lsp-path>
+                      <type>primary</type>
+                      <hop-limit>32</hop-limit>
+                      <include-any>0x0</include-any>
+                      <exclude-any>0x0</exclude-any>
+                    </lsp-path>
+                  </lsp-paths>
+                  <bfd-for-lsp xmlns="urn:huawei:yang:huawei-mpls-te-bfd">
+                    <detect-multiplier>3</detect-multiplier>
+                  </bfd-for-lsp>
+                  <bfd-for-tunnel xmlns="urn:huawei:yang:huawei-mpls-te-bfd">
+                    <detect-multiplier>3</detect-multiplier>
+                  </bfd-for-tunnel>
+                </sr-te>
+                <igp-attr xmlns="urn:huawei:yang:huawei-igp">
+                  <adv-enable>false</adv-enable>
+                  <adv-ipv6-enable>false</adv-ipv6-enable>
+                  <hold-time>0</hold-time>
+                  <shortcut-type>{$SHORTCUT_TYPE}</shortcut-type>
+                  <absolute>5</absolute>
+                </igp-attr>
+              </te-tunnel>
+            </tunnel-protocol>
+          </interface>
+        </interfaces>
+      </ifm>
+    </config>
+  </device>
+ </devices>
+</config-template>
+

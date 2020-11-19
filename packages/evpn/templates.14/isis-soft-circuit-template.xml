@@ -1,0 +1,94 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0">
+ <devices xmlns="http://tail-f.com/ns/ncs">
+  <device tags="nocreate">
+    <name>{$DEVICE}</name>
+    <config>
+      <network-instance xmlns="urn:huawei:yang:huawei-network-instance" tags="merge">
+        <instances>
+          <instance>
+            <name>_public_</name>
+            <isis xmlns="urn:huawei:yang:huawei-isis">
+              <sites>
+                <site>
+                  <id>{$SITE_ID}</id>
+                  <circuits>
+                    <circuit>
+                      <name>{$INTERFACE}</name>
+                      <level>level-1-2</level>
+                      <p2p-enable>true</p2p-enable>
+                      <hello-mode>normal</hello-mode>
+                      <silent-enable>false</silent-enable>
+                      <purge-source-trace-block>false</purge-source-trace-block>
+                      <mesh-group>
+                        <state>inactive</state>
+                      </mesh-group>
+                      <suppress-flapping>
+                        <peer>
+                          <enable>true</enable>
+                          <detect-interval>60</detect-interval>
+                          <threshold>10</threshold>
+                          <resume-interval>120</resume-interval>
+                          <hold-max-cost>true</hold-max-cost>
+                        </peer>
+                      </suppress-flapping>
+                      <timer>
+                        <csnp-interval-level1>10</csnp-interval-level1>
+                        <csnp-interval-level2>10</csnp-interval-level2>
+                        <throttle-interval>50</throttle-interval>
+                        <throttle-count>10</throttle-count>
+                      </timer>
+                      <p2p>
+                        <snpa-check>false</snpa-check>
+                        <peer-ip-ignore>false</peer-ip-ignore>
+                        <ppp-negotiation>3-way</ppp-negotiation>
+                        <hello-timer>10</hello-timer>
+                        <hold-multiplier>3</hold-multiplier>
+                        <lsp-retransmit-interval>5</lsp-retransmit-interval>
+                        <ppp-osicp-check>false</ppp-osicp-check>
+                        <conser>false</conser>
+                      </p2p>
+                      <afs>
+                        <af>
+                          <type>afipv4</type>
+                          <tag-level1>0</tag-level1>
+                          <tag-level2>0</tag-level2>
+                          <suppress-reach>no-set</suppress-reach>
+                          <mpls-ldp>
+                            <auto-flag-block>false</auto-flag-block>
+                          </mpls-ldp>
+                          <frr>
+                            <lfa-block-level1>false</lfa-block-level1>
+                            <lfa-block-level2>false</lfa-block-level2>
+                            <rlfa-disable-level1>false</rlfa-disable-level1>
+                            <rlfa-disable-level2>false</rlfa-disable-level2>
+                            <tilfa-disable-level1>false</tilfa-disable-level1>
+                            <tilfa-disable-level2>false</tilfa-disable-level2>
+                          </frr>
+                          <ldp-sync>
+                            <enable>none</enable>
+                          </ldp-sync>
+                          <?if {$HAS_PREFIX_SID = 'true'}?>
+                          <prefix-sids xmlns="urn:huawei:yang:huawei-isis-sr">
+                            <prefix-sid>
+                              <algorithm>0</algorithm>
+                              <type>index</type>
+                              <label>{$LABEL}</label>
+                              <node-flag>true</node-flag>
+                            </prefix-sid>
+                          </prefix-sids>
+                          <?end?>
+                        </af>
+                      </afs>
+                    </circuit>
+                  </circuits>
+                </site>
+              </sites>
+            </isis>
+          </instance>
+        </instances>
+      </network-instance>
+    </config>
+  </device>
+ </devices>
+</config-template>
+

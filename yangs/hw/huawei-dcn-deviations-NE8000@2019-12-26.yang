@@ -1,0 +1,35 @@
+/*
+Copyright (C) 2019 Huawei Technologies Co., Ltd. All rights reserved.
+*/
+module huawei-dcn-deviations-NE8000 {
+  namespace "urn:huawei:yang:huawei-dcn-deviations-NE8000";
+  prefix dcn-devs-NE8000;
+
+  import huawei-dcn {
+    prefix dcn;
+  }
+
+  organization
+    "Huawei Technologies Co., Ltd.";
+  contact
+    "Huawei Industrial Base
+     Bantian, Longgang
+     Shenzhen 518129
+     People's Republic of China
+     Website: http://www.huawei.com
+     Email: support@huawei.com";
+  description
+    "Data communication network.";
+
+  revision 2019-12-26 {
+    description
+      "Init revision.";
+    reference "Huawei private.";
+  }
+
+  deviation "/dcn:dcn/dcn:site/dcn:enable" {
+    deviate replace {
+      type boolean;
+    }
+  }
+}

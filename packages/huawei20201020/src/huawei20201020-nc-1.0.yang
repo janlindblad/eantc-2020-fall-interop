@@ -1,0 +1,13 @@
+module huawei20201020-nc-1.0 {
+  yang-version 1.1;
+  namespace "http://tail-f.com/ns/ned-id/huawei20201020-nc-1.0";
+  prefix huawei20201020-nc-1.0;
+
+  import huawei20201020-nc {
+    prefix family;
+  }
+
+  identity huawei20201020-nc-1.0 {
+    base family:huawei20201020-nc;
+  }
+}

@@ -1,0 +1,91 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0">
+ <devices xmlns="http://tail-f.com/ns/ncs">
+  <device tags="nocreate">
+    <name>{$DEVICE}</name>
+    <config>
+      <bgp-lsp xmlns="urn:huawei:yang:huawei-bgp-lsp" tags="merge">
+        <bfd>
+          <parameters>
+            <detection-multiplier>3</detection-multiplier>
+          </parameters>
+        </bfd>
+      </bgp-lsp>
+      <mplsoam xmlns="urn:huawei:yang:huawei-mplsoam" tags="merge">
+        <global>
+          <oam-enable>false</oam-enable>
+        </global>
+      </mplsoam>
+      <network-instance xmlns="urn:huawei:yang:huawei-network-instance" tags="merge">
+        <instances>
+          <instance>
+            <name>_public_</name>
+            <mpls xmlns="urn:huawei:yang:huawei-mpls">
+              <common>
+                <mpls-interfaces>
+                  <mpls-interface>
+                    <name>{$INTERFACE}</name>
+                  </mpls-interface>
+                </mpls-interfaces>
+              </common>
+            </mpls>
+            <segment-routing xmlns="urn:huawei:yang:huawei-segment-routing">
+              <enable>true</enable>
+              <tunnel-prefer>ldp</tunnel-prefer>
+              <traffic-stats>
+                <mode>none</mode>
+              </traffic-stats>
+              <srpolicy xmlns="urn:huawei:yang:huawei-srpolicy">
+                <policy-attributes>
+                  <delete-delay>20000</delete-delay>
+                  <hsb-enable>false</hsb-enable>
+                  <traffic-statistics-enable>false</traffic-statistics-enable>
+                  <bgp-ls-enable>false</bgp-ls-enable>
+                  <policy-threshold-upper>80</policy-threshold-upper>
+                  <policy-threshold-lower>75</policy-threshold-lower>
+                  <list-threshold-upper>80</list-threshold-upper>
+                  <list-threshold-lower>75</list-threshold-lower>
+                  <bfd>
+                    <enable>disable</enable>
+                    <min-tx>10</min-tx>
+                    <min-rx>10</min-rx>
+                    <multi-num>3</multi-num>
+                  </bfd>
+                </policy-attributes>
+              </srpolicy>
+            </segment-routing>
+            <te xmlns="urn:huawei:yang:huawei-te">
+              <interfaces xmlns="urn:huawei:yang:huawei-te-interface">
+                <interface>
+                  <name>{$INTERFACE}</name>
+                  <mpls-te-enable>true</mpls-te-enable>
+                  <p2mp-te-disable>false</p2mp-te-disable>
+                  <attribute>
+                    <admin-groups>0x0</admin-groups>
+                    <bandwidth>
+                      <max-reserved>0</max-reserved>
+                      <bc0>0</bc0>
+                      <change-threshold-down>10</change-threshold-down>
+                      <change-threshold-up>10</change-threshold-up>
+                    </bandwidth>
+                  </attribute>
+                  <mpls-te-attribute>
+                    <auto-frr-mode>default</auto-frr-mode>
+                    <auto-frr-attributes>
+                      <bandwidth>0</bandwidth>
+                      <setup-priority>7</setup-priority>
+                      <hold-priority>7</hold-priority>
+                      <hop-limit>32</hop-limit>
+                      <include-any>0x0</include-any>
+                      <exclude-any>0x0</exclude-any>
+                    </auto-frr-attributes>
+                  </mpls-te-attribute>
+                </interface>
+              </interfaces>
+            </te>
+          </instance>
+        </instances>
+      </network-instance>
+    </config>
+  </device>
+ </devices>
+</config-template>
