@@ -830,14 +830,14 @@
                           <ldp-sync>
                             <enable>none</enable>
                           </ldp-sync>
-                          <!--FIXME prefix-sids xmlns="urn:huawei:yang:huawei-isis-sr">
+                          <prefix-sids xmlns="urn:huawei:yang:huawei-isis-sr">
                             <prefix-sid>
                               <algorithm>0</algorithm>
                               <type>index</type>
                               <label>{$LABEL}</label>
                               <node-flag>true</node-flag>
                             </prefix-sid>
-                          </prefix-sids-->
+                          </prefix-sids>
                         </af>
                       </afs>
                     </circuit>
