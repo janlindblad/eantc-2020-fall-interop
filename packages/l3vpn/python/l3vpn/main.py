@@ -70,14 +70,19 @@ class ServiceCallbacks(Service):
                 DESTINATION_ADDRESS = remote_topo.router_id,
                 CORE_INTERFACE = pe_topo.interface,
                 CORE_ADDRESS = pe_topo.core_address,
+                CORE_PREFIXLEN = pe_topo.core_prefixlen,
                 CORE_MASK = prefixlen2mask(pe_topo.core_prefixlen),
                 EDGE_INTERFACE = edge_interface,
-                EDGE_INTERFACE_TYPE = interface_type(edge_interface),
                 EDGE_SUBINTERFACE = allocate_subif(edge_interface),
+                EDGE_INTERFACE_TYPE = interface_type(edge_interface),
                 EDGE_ADDRESS = sna.ip_connection.ipv4.addresses.provider_address,
+                EDGE_PREFIXLEN = sna.ip_connection.ipv4.addresses.prefix_length,
                 EDGE_MASK = prefixlen2mask(sna.ip_connection.ipv4.addresses.prefix_length),
                 EDGE_ADDRESS_IPV6 = sna.ip_connection.ipv6.addresses.provider_address,
                 EDGE_PREFIXLEN_IPV6 = sna.ip_connection.ipv4.addresses.prefix_length,
+                PEER_ADDRESS = sna.ip_connection.ipv4.addresses.customer_address,
+                PEER_ADDRESS_IPV6 = sna.ip_connection.ipv6.addresses.customer_address,
+                PEER_AS = "110"
             )
         self.log.info('Service create done')
 

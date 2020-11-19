@@ -1,6 +1,6 @@
 <devices xmlns="http://tail-f.com/ns/ncs">
   <device>
-    <name>{$DEVICE}</name>
+    <name>hwx4</name>
     <config>
       <bgp xmlns="urn:huawei:yang:huawei-bgp">
         <global>
@@ -8,7 +8,7 @@
         </global>
         <base-process>
           <enable>true</enable>
-          <as>{$AS}</as>
+          <as>2345</as>
           <keep-all-routes>false</keep-all-routes>
           <check-first-as>true</check-first-as>
           <router-id-auto-select>false</router-id-auto-select>
@@ -48,23 +48,23 @@
       <ifm xmlns="urn:huawei:yang:huawei-ifm">
         <interfaces>
           <interface>
-            <name>{$CORE_INTERFACE}</name>
+            <name>25GE3/0/0</name>
             <ipv4 xmlns="urn:huawei:yang:huawei-ip">
               <addresses>
                 <address>
-                  <ip>{$CORE_ADDRESS}</ip>
-                  <mask>{$CORE_MASK}</mask>
+                  <ip>10.1.1.1</ip>
+                  <mask>255.255.255.0</mask>
                   <type>main</type>
                 </address>
               </addresses>
             </ipv4>
           </interface>
           <interface>
-            <name>{$EDGE_INTERFACE}.{$EDGE_SUBINTERFACE}</name>
+            <name>25GE3/0/70.4</name>
             <class>sub-interface</class>
-            <type>{$EDGE_INTERFACE_TYPE}</type>
-            <parent-name>{$EDGE_INTERFACE}</parent-name>
-            <number>{$EDGE_SUBINTERFACE}</number>
+            <type>25GE</type>
+            <parent-name>25GE3/0/70</parent-name>
+            <number>4</number>
             <admin-status>up</admin-status>
             <link-protocol>ethernet</link-protocol>
             <router-type>broadcast</router-type>
@@ -154,8 +154,8 @@
             <ipv4 xmlns="urn:huawei:yang:huawei-ip">
               <addresses>
                 <address>
-                  <ip>{$EDGE_ADDRESS}</ip>
-                  <mask>{$EDGE_MASK}</mask>
+                  <ip>30.0.1.1</ip>
+                  <mask>255.255.255.0</mask>
                   <type>main</type>
                 </address>
               </addresses>
@@ -165,8 +165,8 @@
               <auto-link-local>false</auto-link-local>
               <addresses>
                 <address>
-                  <ip>{$EDGE_ADDRESS_IPV6}</ip>
-                  <prefix-length>{$EDGE_PREFIXLEN_IPV6}</prefix-length>
+                  <ip>3000::1</ip>
+                  <prefix-length>24</prefix-length>
                   <type>global</type>
                   <algorithm-type>none</algorithm-type>
                 </address>
@@ -258,7 +258,7 @@
             <ipv4 xmlns="urn:huawei:yang:huawei-ip">
               <addresses>
                 <address>
-                  <ip>{$SOURCE_ADDRESS}</ip>
+                  <ip>2.2.2.2</ip>
                   <mask>255.255.255.255</mask>
                   <type>main</type>
                 </address>
@@ -320,7 +320,7 @@
                 <common-attributes>
                   <signal-protocol>segment-routing</signal-protocol>
                   <tunnel-id>1</tunnel-id>
-                  <egress-lsr-id>{$DESTINATION_ADDRESS}</egress-lsr-id>
+                  <egress-lsr-id>1.1.1.1</egress-lsr-id>
                   <reserved-for-binding>false</reserved-for-binding>
                   <lsp-tp-outbound>false</lsp-tp-outbound>
                   <statistic-enable>false</statistic-enable>
@@ -363,7 +363,7 @@
         <common>
           <global>
             <mpls-enable>true</mpls-enable>
-            <lsr-id>{$SOURCE_ADDRESS}</lsr-id>
+            <lsr-id>2.2.2.2</lsr-id>
             <null-lable-type>non-null</null-lable-type>
             <diff-serv-mode>uniform</diff-serv-mode>
             <te-ttl-mode>uniform</te-ttl-mode>
@@ -497,7 +497,7 @@
             <name>_public_</name>
             <bgp xmlns="urn:huawei:yang:huawei-bgp">
               <base-process>
-                <router-id>{$SOURCE_ADDRESS}</router-id>
+                <router-id>2.2.2.2</router-id>
                 <afs>
                   <af>
                     <type>ipv4uni</type>
@@ -635,8 +635,8 @@
                 </afs>
                 <peers>
                   <peer>
-                    <address>{$DESTINATION_ADDRESS}</address>
-                    <remote-as>{$AS}</remote-as>
+                    <address>1.1.1.1</address>
+                    <remote-as>2345</remote-as>
                     <local-if-name>LoopBack1</local-if-name>
                     <password-type>null</password-type>
                     <tracking-enable>false</tracking-enable>
@@ -822,12 +822,12 @@
                   </local-mt>
                   <net-entitys>
                     <net-entity>
-                      <value>{$ISIS_NET_ENTITY}</value>
+                      <value>10.0000.0000.0002.00</value>
                     </net-entity>
                   </net-entitys>
                   <circuits>
                     <circuit>
-                      <name>{$CORE_INTERFACE}</name>
+                      <name>25GE3/0/0</name>
                       <level>level-1-2</level>
                       <p2p-enable>false</p2p-enable>
                       <hello-mode>normal</hello-mode>
@@ -950,7 +950,7 @@
                             <prefix-sid>
                               <algorithm>0</algorithm>
                               <type>index</type>
-                              <label>{$LABEL}</label>
+                              <label>200</label>
                               <node-flag>true</node-flag>
                             </prefix-sid>
                           </prefix-sids>
@@ -961,6 +961,7 @@
                   <afs>
                     <af>
                       <type>afipv4</type>
+                      <apply-qppb>false</apply-qppb>
                       <max-load-balancing>64</max-load-balancing>
                       <auto-cost>false</auto-cost>
                       <bandwidth>100</bandwidth>
@@ -1061,7 +1062,7 @@
               <common>
                 <mpls-interfaces>
                   <mpls-interface>
-                    <name>{$CORE_INTERFACE}</name>
+                    <name>25GE3/0/0</name>
                   </mpls-interface>
                 </mpls-interfaces>
               </common>
@@ -1094,7 +1095,7 @@
             <te xmlns="urn:huawei:yang:huawei-te">
               <interfaces xmlns="urn:huawei:yang:huawei-te-interface">
                 <interface>
-                  <name>{$CORE_INTERFACE}</name>
+                  <name>25GE3/0/0</name>
                   <mpls-te-enable>true</mpls-te-enable>
                   <p2mp-te-disable>false</p2mp-te-disable>
                   <attribute>
@@ -1270,7 +1271,7 @@
                 </afs>
                 <peers>
                   <peer>
-                    <address>{$PEER_ADDRESS}</address>
+                    <address>30.0.1.2</address>
                     <remote-as>110</remote-as>
                     <password-type>null</password-type>
                     <ebgp-max-hop>1</ebgp-max-hop>
@@ -1321,7 +1322,7 @@
                     </afs>
                   </peer>
                   <peer>
-                    <address>{$PEER_ADDRESS_IPV6}</address>
+                    <address>3000::2</address>
                     <remote-as>110</remote-as>
                     <password-type>null</password-type>
                     <ebgp-max-hop>1</ebgp-max-hop>
@@ -1378,7 +1379,7 @@
             <afs xmlns="urn:huawei:yang:huawei-l3vpn">
               <af>
                 <type>ipv4-unicast</type>
-                <route-distinguisher>{$AS}:{$RD}</route-distinguisher>
+                <route-distinguisher>2345:5</route-distinguisher>
                 <label-mode>per-instance</label-mode>
                 <vpn-frr>false</vpn-frr>
                 <tunnel-policy>111</tunnel-policy>
@@ -1386,11 +1387,11 @@
                 <lsp-operation>pop</lsp-operation>
                 <vpn-targets>
                   <vpn-target>
-                    <value>{$AS}:44</value>
+                    <value>2345:44</value>
                     <type>export-extcommunity</type>
                   </vpn-target>
                   <vpn-target>
-                    <value>{$AS}:44</value>
+                    <value>2345:44</value>
                     <type>import-extcommunity</type>
                   </vpn-target>
                 </vpn-targets>
@@ -1418,7 +1419,7 @@
               </af>
               <af>
                 <type>ipv6-unicast</type>
-                <route-distinguisher>{$AS}:{$RD}</route-distinguisher>
+                <route-distinguisher>2345:5</route-distinguisher>
                 <label-mode>per-instance</label-mode>
                 <vpn-frr>false</vpn-frr>
                 <tunnel-policy>111</tunnel-policy>
@@ -1426,11 +1427,11 @@
                 <lsp-operation>pop</lsp-operation>
                 <vpn-targets>
                   <vpn-target>
-                    <value>{$AS}:44</value>
+                    <value>2345:44</value>
                     <type>export-extcommunity</type>
                   </vpn-target>
                   <vpn-target>
-                    <value>{$AS}:44</value>
+                    <value>2345:44</value>
                     <type>import-extcommunity</type>
                   </vpn-target>
                 </vpn-targets>
@@ -1479,16 +1480,16 @@
       </tunnel-management>
       <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
         <interface>
-          <name>{$CORE_INTERFACE}</name>
+          <name>25GE3/0/0</name>
           <ipv4 xmlns="urn:ietf:params:xml:ns:yang:ietf-ip">
             <address>
-              <ip>{$CORE_ADDRESS}</ip>
-              <prefix-length>{$CORE_PREFIXLEN}</prefix-length>
+              <ip>10.1.1.1</ip>
+              <prefix-length>24</prefix-length>
             </address>
           </ipv4>
         </interface>
         <interface>
-          <name>{$EDGE_INTERFACE}.{$EDGE_SUBINTERFACE}</name>
+          <name>25GE3/0/70.4</name>
           <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:l2vlan</type>
           <enabled>true</enabled>
           <link-up-down-trap-enable>enabled</link-up-down-trap-enable>
@@ -1496,15 +1497,15 @@
             <enabled>true</enabled>
             <forwarding>true</forwarding>
             <address>
-              <ip>{$EDGE_ADDRESS}</ip>
-              <prefix-length>{$EDGE_PREFIXLEN}</prefix-length>
+              <ip>30.0.1.1</ip>
+              <prefix-length>24</prefix-length>
             </address>
           </ipv4>
           <ipv6 xmlns="urn:ietf:params:xml:ns:yang:ietf-ip">
             <enabled>true</enabled>
             <forwarding>true</forwarding>
             <address>
-              <ip>{$EDGE_ADDRESS_IPV6}</ip>
+              <ip>3000::1</ip>
               <prefix-length>24</prefix-length>
             </address>
             <dup-addr-detect-transmits>1</dup-addr-detect-transmits>
@@ -1519,7 +1520,7 @@
             <enabled>true</enabled>
             <forwarding>true</forwarding>
             <address>
-              <ip>{$SOURCE_ADDRESS}</ip>
+              <ip>2.2.2.2</ip>
               <prefix-length>32</prefix-length>
             </address>
           </ipv4>
