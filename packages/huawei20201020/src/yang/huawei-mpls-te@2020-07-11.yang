@@ -2061,7 +2061,7 @@ module huawei-mpls-te {
               "Self-ping timeout period of an RSVP-TE tunnel. Value 65535 indicates no limit on the detection time.";
           }
           container fast-reroute {
-            must "(enable='true' and mode and mode='facility-backup') or (enable='false' and not(mode='facility-backup'))";
+            //JLINDBLA must "(enable='true' and mode and mode='facility-backup') or (enable='false' and not(mode='facility-backup'))";
             must "not(../disable-reroute='true' and enable='true')";
             description
               "Configure fast reroute attribute of a Tunnel.";
