@@ -92,7 +92,7 @@
             </ipv4>
           </interface>
           <interface>
-            <name>{$EDGE_INTERFACE}.${EDGE_SUBINTERFACE}</name>
+            <name>{$EDGE_INTERFACE}.{$EDGE_SUBINTERFACE}</name>
             <class>sub-interface</class>
             <type>{$EDGE_INTERFACE_TYPE}</type>
             <parent-name>{$EDGE_INTERFACE}</parent-name>
